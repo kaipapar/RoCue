@@ -1,0 +1,13 @@
+7.5.23
+Plan: write plan for code architecture without any global variables.
+Reminder: remove all global variables.
+Github: make repo _nice_
+Doxygen: Create documentation with doxygen or similar tool
+Pathfinding: Make the orcs BSF pathfinding work
+Stairs: Stairs currently only work in one direction, need to work both ways.
+Inventory: Create architecture for inventory system
+Items: Create new items after inventory system
+World interaction: Pitfalls etc
+File I/O: Save points--gamestates..
+Error Checking: Memory buffers, check that malloc works.
+Seed: Make seeding optional
