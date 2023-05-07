@@ -1,0 +1,20 @@
+1. MENU 
+    perus menu tehty
+
+2. File I/O kartan lukemiseen tiedostosta
+
+
+3. arkkitehtuuri kolikoille jne ja logiikka niiden takana
+
+4. vihollis entity 
+    polunetsintä
+    entityn luominen
+    kanssakäyminen pelaajan kanssa (menee samaan laariin kolikkojen keruun kanssa)
+    kaikille entityille 'oma paikka'/struct array --> entityjen piirtäminen pyörisi kaikille samassa funktiossa.
+
+    ÖRKIN POINTSIT KUNTOON!
+
+5. Windows portti
+
+6. File I/O kaiken data kirjoittamiseen ja lukemiseen tiedostosta.<s
+
