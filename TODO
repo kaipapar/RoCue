@@ -2,7 +2,10 @@
 status flags:   x = done, 
                 ~ = on hold, 
                 + = almost done,
-                - = started
+                - = started,
+                u = untested,
+                t = tested
+
 
 priority flags: 1 = low priority,
                 2 = medium priority,
@@ -14,8 +17,8 @@ priority flags: 1 = low priority,
         Main.c global variables and Rogue.h externs should be localized.
 - [][3] Reminder: remove all global variables.
 - [-][1] Github: make repo _nice_
-- [][2] Doxygen: Create documentation with doxygen or similar tool
-- [-][2] Pathfinding: Make the orcs BSF pathfinding work
+- [-][2] Doxygen: Create documentation with doxygen or similar tool
+- [~][2] Pathfinding: Make the orcs BSF pathfinding work
 - [-][2] Stairs: Stairs currently only work in one direction, need to work both ways.
 - [][2] Inventory: Create architecture for inventory system
 - [][1] Items: Create new items after inventory system
@@ -26,4 +29,6 @@ priority flags: 1 = low priority,
 
 8.5.23
 - [][2] Commenting: Recreate docstrings and comments to work with Doxygen
+- [][1] Windows port: recreate menu using ncurses or find a way for menu.h to work with Win
+
 
