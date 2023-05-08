@@ -24,7 +24,7 @@ priority flags: 1 = low priority,
     - [] Main.c global variables and Rogue.h externs should be localized.
 - [](3) Reminder: remove all global variables. #code
 - [-](1) Github: make repo _nice_ #docs
-- [-](2) Doxygen: Create documentation with doxygen or similar tool #docs
+- [~](2) Doxygen: Create documentation with doxygen or similar tool #docs
 - [~](2) Pathfinding: Make the orcs BSF pathfinding work @Kaipapar
 - [-](2) Stairs: Stairs currently only work in one direction, need to work both ways.
 - [](2) Inventory: Create architecture for inventory system
