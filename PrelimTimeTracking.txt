@@ -1,0 +1,4 @@
+7.5.23  Project start - Kaipapar, Neettan
+    16-20 -- Project plan, scope. Todo list, reviewing old code.
+8.5.23  Project environment polishing - Kaipapar
+    10.30-x -- TODO, time tracking, researching Doxygen.
