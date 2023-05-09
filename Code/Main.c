@@ -1,9 +1,8 @@
-/*
-File:           Main.c
-Author:         Karri Korsu, Nestori Heiskanen
-Description:    main file for rogue tutorial
+/**
+ * @file Main.c
+ * @brief This file is run first.
+ * @authors Karri Korsu, Nestori Heiskanen 
 */
-
 #include "Rogue.h"
 
 int currentFloor = 0;
@@ -15,7 +14,10 @@ struct Entity* coinArray;
 struct Entity* orc;
 struct Entity* stairs;
 
-
+/**
+ * Sets up the run essential variables.
+ * 
+*/
 int main()
 {   
     struct Position posStart;
@@ -26,8 +28,8 @@ int main()
     
     setupCurses();
     
-    time_t t = 0;
-	srand((unsigned) time(&t));
+    time_t t = 0; 
+	srand((unsigned) time(&t)); ///< Sets up the seed for random generation to start of epoch
 
     //floorList = generateFloor();
 
