@@ -9,7 +9,7 @@
 #include "Rogue.h"
 
 void createFOV(struct Entity* player, 
-                struct Tile*** map, 
+                struct Tile** map, 
                 struct Entity* coinArray, 
                 struct Entity* orc, 
                 struct Entity* stairs)
@@ -20,8 +20,8 @@ void createFOV(struct Entity* player,
     int radius = 15; // draw distance of the player
     struct Position target;
 
-    map[currentFloor][player->pos.y][player->pos.x].visible = true;
-    map[currentFloor][player->pos.y][player->pos.x].seen = true;
+    map[player->pos.y][player->pos.x].visible = true;
+    map[player->pos.y][player->pos.x].seen = true;
 
     for (y = player->pos.y - radius; y < player->pos.y + radius; y++)
     {
@@ -34,8 +34,8 @@ void createFOV(struct Entity* player,
 
             if (distance < radius && isInMap(y, x) && lineOfSight(player->pos, target, map))
             {
-                map[currentFloor][y][x].visible = true;
-                map[currentFloor][y][x].seen = true;
+                map[y][x].visible = true;
+                map[y][x].seen = true;
                 for (int i = 0; i < COIN_COUNT; i++)
                 {
                     if ((coinArray + i)->pos.y == y && (coinArray + i)->pos.x == x && (coinArray + i)->collected == false) 
@@ -59,7 +59,7 @@ void createFOV(struct Entity* player,
 }
 
 void clearFOV(struct Entity* player, 
-                struct Tile*** map, 
+                struct Tile** map, 
                 struct Entity* coinArray, 
                 struct Entity* orc, 
                 struct Entity* stairs)
@@ -74,7 +74,7 @@ void clearFOV(struct Entity* player,
         {
             if (isInMap(y,x))
             {
-                map[currentFloor][y][x].visible = false;
+                map[y][x].visible = false;
 
                 /*  clear fov of coins  */
                 for (int i = 0; i < COIN_COUNT; i++)
@@ -126,7 +126,7 @@ bool isInMap(int y, int x)
     return false;
 }
 
-bool lineOfSight(struct Position origin, struct Position target, struct Tile*** map)
+bool lineOfSight(struct Position origin, struct Position target, struct Tile** map)
 {
     int t = 0;
     int x = 0;
@@ -154,7 +154,7 @@ bool lineOfSight(struct Position origin, struct Position target, struct Tile*** 
     {
         t = yAbsDelta * 2 - xAbsDelta;
 
-        while (map[currentFloor][y][x].transparent)
+        while (map[y][x].transparent)
         {
             if (t >= 0)
             {
@@ -176,7 +176,7 @@ bool lineOfSight(struct Position origin, struct Position target, struct Tile*** 
     {
         t = xAbsDelta * 2 - yAbsDelta;
 
-        while (map[currentFloor][y][x].transparent)
+        while (map[y][x].transparent)
         {
             if (t >= 0)
             {

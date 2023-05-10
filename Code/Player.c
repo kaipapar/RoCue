@@ -28,7 +28,7 @@ struct Entity* playerCreation(struct Position posStart)
 /*  Handle user input */
 void inputHandling(int input, 
                 struct Entity* player, 
-                struct Tile*** map, 
+                struct Tile** map, 
                 struct Entity* coinArray, 
                 struct Entity* orc, 
                 struct Entity* stairs)
@@ -67,12 +67,12 @@ void inputHandling(int input,
 /*  Checks whether movement over a certain block is allowed */
 void playerMovement(struct Position newPos, 
                     struct Entity* player, 
-                    struct Tile*** map,
+                    struct Tile** map,
                     struct Entity* coinArray,
                     struct Entity* orc, 
                     struct Entity* stairs)
 {
-    if (map[currentFloor][newPos.y][newPos.x].walkable)
+    if (map[newPos.y][newPos.x].walkable)
     {
         clearFOV(player, map, coinArray, orc, stairs);
         player->pos.y = newPos.y;
@@ -82,7 +82,7 @@ void playerMovement(struct Position newPos,
 }
 
 void interact(struct Entity* player, 
-                struct Tile*** map,
+                struct Tile** map,
                 struct Entity* coinArray,
                 struct Entity* orc, 
                 struct Entity* stairs)
@@ -117,11 +117,6 @@ void interact(struct Entity* player,
                 currentFloor--;
             } 
             currentFloor++;
-            posStart = mapSetup(map);  
-            player = playerCreation(posStart);
-            coinArray = coinCreation(map);
-            orc = enemyCreation(map);
-            stairs = stairsCreation(map);
         }
     }
 }

@@ -7,7 +7,7 @@
 
 #include "Rogue.h"
 
-struct Entity* coinCreation(struct Tile*** map)
+struct Entity* coinCreation(struct Tile** map)
 {
     int help = 0;   
     struct Entity* coinArray = calloc(COIN_COUNT, sizeof(struct Entity));
@@ -27,7 +27,7 @@ struct Entity* coinCreation(struct Tile*** map)
         int randomx = rand() % 100;
         int randomy = rand() % 25;
 
-        if(map[currentFloor][randomy][randomx].walkable)
+        if(map[randomy][randomx].walkable)
         {
             (coinArray + help) -> pos.y = randomy;
             (coinArray + help) -> pos.x = randomx;

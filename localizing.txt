@@ -1,3 +1,17 @@
 1. initialize variables after menuDraw
 2. find data flows and give pointers as arguments
 3. localize variables
+
+floorstuct:
+1. replace z axis from map with a struct that includes 
+all relevant data for a floor:
+    1. map
+    2. orc
+    3. coinArray
+    4. stairs
+    5. start pos
+    6. exit pos 
+    
+2. create a array of x floor structs --> this is how the z coordinate is replaced
+3. make all data flow _nice_
+

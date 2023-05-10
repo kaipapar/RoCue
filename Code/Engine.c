@@ -35,20 +35,34 @@ void gameLoop()
     int coinAmount = (rand() % 4) + 2;
     struct Entity* coins = coinCreation(coinAmount);
 */
-    struct Tile*** map = mapTileCreation();
 
-    struct Position posStart = mapSetup(map);  
+    struct Floor* floorArray = floorArrayCreation();
+
+    struct Position posStart = getStartPos(floorArray[currentFloor].rooms);  
 
     struct Entity* player = playerCreation(posStart);
-
+/*    
+    struct Tile** map = mapTileCreation();
+    
     struct Entity* coinArray = coinCreation(map);
     
     struct Entity* orc = enemyCreation(map);
 
     struct Entity* stairs = stairsCreation(map);
-    createFOV(player, map, coinArray, orc, stairs);
+*/
+
+    createFOV(player, 
+                floorArray[currentFloor].map, 
+                floorArray[currentFloor].coinArray, 
+                floorArray[currentFloor].orc, 
+                floorArray[currentFloor].stairs);
     //menuDraw();
-    allDraw(map, posStart, player, coinArray, orc, stairs);
+    allDraw(floorArray[currentFloor].map, 
+            posStart, 
+            player, 
+            floorArray[currentFloor].coinArray, 
+            floorArray[currentFloor].orc, 
+            floorArray[currentFloor].stairs);
     
     while(true)
     {       
@@ -56,11 +70,21 @@ void gameLoop()
         if(ch == KEY_F(2))
         {
             break;
-            quitGame(player, map);
+            quitGame(player, floorArray);
             endwin();
         }
-        inputHandling(ch, player, map, coinArray, orc, stairs);
-        allDraw(map, posStart, player, coinArray, orc, stairs);
+        inputHandling(ch, 
+                        player, 
+                        floorArray[currentFloor].map, 
+                        floorArray[currentFloor].coinArray, 
+                        floorArray[currentFloor].orc, 
+                        floorArray[currentFloor].stairs);
+        allDraw(floorArray[currentFloor].map, 
+                posStart, 
+                player, 
+                floorArray[currentFloor].coinArray, 
+                floorArray[currentFloor].orc, 
+                floorArray[currentFloor].stairs);
         /*
         if (gameOver())
         {
@@ -81,10 +105,22 @@ bool gameOver()
     }
 }
 */
-void quitGame(struct Entity* player, struct Tile*** map)
+void quitGame(struct Entity* player, struct Tile** map)
 {
     free(player);
-    releaseMap(map);
+    releaseFloors(map, MAP_DEPTH);
     endwin();
     exit(1);
+}
+
+/**
+ * Error Checking function for pointers
+*/
+void *EC(void *pointer)
+{
+	if (pointer == NULL)
+	{
+		fprintf(stderr, "Error, contiguous memory allocation failed");
+		exit(-1);
+	}
 }

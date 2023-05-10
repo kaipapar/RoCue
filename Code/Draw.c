@@ -10,19 +10,19 @@
 #include "Rogue.h"
 
 
-void mapDrawing(struct Tile*** map)
+void mapDrawing(struct Tile** map)
 {
     for (int y = 0; y < MAP_HEIGHT; y++)
     {
         for (int x = 0; x < MAP_WIDTH; x++)
         {
-            if (map[currentFloor][y][x].visible)
+            if (map[y][x].visible)
             {
-                mvaddch(y, x, map[currentFloor][y][x].ch | map[currentFloor][y][x].color);
+                mvaddch(y, x, map[y][x].ch | map[y][x].color);
             }
-            else if (map[currentFloor][y][x].seen)
+            else if (map[y][x].seen)
             {
-                mvaddch(y, x, map[currentFloor][y][x].ch | COLOR_PAIR(SEEN_COLOR));
+                mvaddch(y, x, map[y][x].ch | COLOR_PAIR(SEEN_COLOR));
             }
             else
             {
@@ -57,7 +57,7 @@ void coinDrawing(struct Entity* coinArray)
     }
 }
 
-void allDraw(struct Tile*** map, struct Position posStart, struct Entity* player, struct Entity* coinArray, struct Entity* orc, struct Entity* stairs)
+void allDraw(struct Tile** map, struct Position posStart, struct Entity* player, struct Entity* coinArray, struct Entity* orc, struct Entity* stairs)
 {
     clear();    // clears the screen before refreshing
     mapDrawing(map); // renders the game map

@@ -21,8 +21,8 @@ priority flags: 1 = low priority,
 ### Uncompleted
 7.5.23  
 - [-] 3 Plan: write plan for code architecture without any global variables. #docs #code
-    - [~] Main.c global variables and Rogue.h externs should be localized.
-- [~] 3 Reminder: remove all global variables. #code
+    - [+] Main.c global variables and Rogue.h externs should be localized.
+- [+] 3 Reminder: remove all global variables. #code
 - [-] 1 Github: make repo _nice_ #docs
 - [~] 2 Doxygen: Create documentation with doxygen or similar tool #docs
 - [~] 2 Pathfinding: Make the orcs BSF pathfinding work @Kaipapar
@@ -39,8 +39,9 @@ priority flags: 1 = low priority,
 - [] 1 Windows port: recreate menu using ncurses or find a way for menu.h to work with Win
 
 10.5.23
-- [] 2 Create floor struct and struct array 
-    - [] to replace 3d array of map. z coordinates --> floors struct elements.
+- [+] 2 Create floor struct and struct array 
+    - [x] to replace 3d array of map. z coordinates --> floors struct elements.
+- [] 1 Time tracking: create a spreadsheet for time tracking
 
 
 ### Completed [x]
