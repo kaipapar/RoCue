@@ -65,6 +65,7 @@ void allDraw()
     coinDrawing(); // temporary testing function (replace later)
     entityDrawing(orc); // orc is similar to player
     entityDrawing(stairs);
+    entityDrawing(stairs2);
     infoBoxDraw(); // UI element rendering for controls info
 }
 

@@ -108,6 +108,32 @@ void interact()
             coinArray = coinCreation();
             orc = enemyCreation();
             stairs = stairsCreation();
+            stairs2 = stairsCreation2();
+        }
+    //____________________________________
+        else if (player->pos.y == stairs2->pos.y && player->pos.x == stairs2->pos.x)
+        {
+            currentFloor--;
+            struct Position posStart;
+            while (true)
+            {
+                int randomx = rand() % 100;
+                int randomy = rand() % 25;
+                int flag = 0;
+                if (map[currentFloor][randomy][randomx].walkable && flag == 0)
+                {
+                posStart.y = randomy;
+                posStart.x = randomx;
+
+                    flag = 1;
+                    break;
+                }
+            }
+            player = playerCreation(posStart);
+            coinArray = coinCreation();
+            orc = enemyCreation();
+            stairs = stairsCreation();
+            stairs2 = stairsCreation2();
         }
     }
 }

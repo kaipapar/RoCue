@@ -85,6 +85,34 @@ struct Entity* stairsCreation()
 {
     struct Entity* stairs = calloc(1, sizeof(struct Entity));
 
+    stairs -> ch = '>';
+    stairs -> color = COLOR_PAIR(COIN_COLOR);
+    stairs -> visible = true;
+    stairs -> transparent = false;
+    stairs -> points = 1000;
+
+    int flag = 0;
+
+    while (true)
+    {
+        int randomx = rand() % 100;
+        int randomy = rand() % 25;
+
+        if (map[currentFloor][randomy][randomx].walkable && flag == 0)
+        {
+            stairs -> pos.x = randomx;
+            stairs -> pos.y = randomy;
+            flag = 1;
+            break;
+        }
+    }
+    return stairs;
+}
+
+struct Entity* stairsCreation2()
+{
+    struct Entity* stairs = calloc(1, sizeof(struct Entity));
+
     stairs -> ch = '<';
     stairs -> color = COLOR_PAIR(COIN_COLOR);
     stairs -> visible = true;
@@ -97,6 +125,7 @@ struct Entity* stairsCreation()
     {
         int randomx = rand() % 100;
         int randomy = rand() % 25;
+        randomx++;
 
         if (map[currentFloor][randomy][randomx].walkable && flag == 0)
         {

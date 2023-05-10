@@ -13,6 +13,7 @@ struct Tile*** map;
 struct Entity* coinArray;
 struct Entity* orc;
 struct Entity* stairs;
+struct Entity* stairs2;
 
 /**
  * Sets up the run essential variables.
@@ -44,6 +45,7 @@ int main()
     orc = enemyCreation();
 
     stairs = stairsCreation();
+    stairs2 = stairsCreation2();
 
     menuDraw(); // --> Engine.c/Gameloop starts
 
