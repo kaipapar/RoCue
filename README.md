@@ -6,7 +6,7 @@
 2. In RoCue/Code directory run:
   1. `make`
   2. `./Rogue`
-  3. On subsequent play sessions you only need to run the program with step 2. If you want to recompile you run `make clean`, [make], [./Rogue].
+  3. On subsequent play sessions you only need to run the program with step 2. If you want to recompile you run `make clean`, `make`, `./Rogue`.
   Enjoy!
 ## About the project
 
