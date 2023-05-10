@@ -20,13 +20,13 @@ priority flags: 1 = low priority,
 
 ### Uncompleted
 7.5.23  
-- [] 3 Plan: write plan for code architecture without any global variables. #docs #code
-    - [] Main.c global variables and Rogue.h externs should be localized.
-- [] 3 Reminder: remove all global variables. #code
+- [-] 3 Plan: write plan for code architecture without any global variables. #docs #code
+    - [~] Main.c global variables and Rogue.h externs should be localized.
+- [~] 3 Reminder: remove all global variables. #code
 - [-] 1 Github: make repo _nice_ #docs
 - [~] 2 Doxygen: Create documentation with doxygen or similar tool #docs
 - [~] 2 Pathfinding: Make the orcs BSF pathfinding work @Kaipapar
-- [-] 2 Stairs: Stairs currently only work in one direction, need to work both ways.
+- [+] 2 Stairs: Stairs currently only work in one direction, need to work both ways.
 - [] 2 Inventory: Create architecture for inventory system
 - [] 1 Items: Create new items after inventory system
 - [] 1 World interaction: Pitfalls etc
@@ -37,6 +37,11 @@ priority flags: 1 = low priority,
 8.5.23  
 - [] 2 Commenting: Recreate docstrings and comments to work with Doxygen #docs
 - [] 1 Windows port: recreate menu using ncurses or find a way for menu.h to work with Win
+
+10.5.23
+- [] 2 Create floor struct and struct array 
+    - [] to replace 3d array of map. z coordinates --> floors struct elements.
+
 
 ### Completed [x]
 

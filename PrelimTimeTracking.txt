@@ -4,4 +4,5 @@
     10.30-12:45 -- TODO, time tracking, researching Doxygen.
     14:30-17:17 -- Same as above, and Readme. Initialized Doxygen documentation for project.
 10.5.23 Project environment polishing - Kaipapar, Neettan
-    11-14 --
+    11-14 -- Project plan, starting localization, stairs to other way, planning floor struct
+    15:30- x -- Kaipapar. continue localization
