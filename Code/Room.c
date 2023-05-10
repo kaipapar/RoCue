@@ -23,7 +23,7 @@ struct Room roomCreation(int y, int x, int height, int width)
     return newRoom;
 }
 
-void addRoomToMap(struct Room room)
+void addRoomToMap(struct Room room, struct Tile*** map)
 {
     for (int y = room.pos.y; y < room.pos.y + room.roomHeight; y++)
     {
@@ -37,7 +37,7 @@ void addRoomToMap(struct Room room)
 }
 
 // Draws new room connections between the centers of 2 rooms and builds hallways on the map
-void roomConnections(struct Position centerSelf, struct Position centerOther)
+void roomConnections(struct Position centerSelf, struct Position centerOther, struct Tile*** map)
 {
     struct Position temp;
     

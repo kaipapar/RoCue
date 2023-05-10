@@ -8,7 +8,11 @@
 */
 #include "Rogue.h"
 
-void createFOV(struct Entity* player)
+void createFOV(struct Entity* player, 
+                struct Tile*** map, 
+                struct Entity* coinArray, 
+                struct Entity* orc, 
+                struct Entity* stairs)
 {
     int y = 0;
     int x = 0;
@@ -28,7 +32,7 @@ void createFOV(struct Entity* player)
             distance = getDistance(player->pos, target);
             //printf("Target y: %d, target x: %d, player y, player x, distance");
 
-            if (distance < radius && isInMap(y, x) && lineOfSight(player->pos, target))
+            if (distance < radius && isInMap(y, x) && lineOfSight(player->pos, target, map))
             {
                 map[currentFloor][y][x].visible = true;
                 map[currentFloor][y][x].seen = true;
@@ -54,7 +58,11 @@ void createFOV(struct Entity* player)
     }
 }
 
-void clearFOV(struct Entity* player)
+void clearFOV(struct Entity* player, 
+                struct Tile*** map, 
+                struct Entity* coinArray, 
+                struct Entity* orc, 
+                struct Entity* stairs)
 {
     int y = 0;
     int x = 0;
@@ -118,7 +126,7 @@ bool isInMap(int y, int x)
     return false;
 }
 
-bool lineOfSight(struct Position origin, struct Position target)
+bool lineOfSight(struct Position origin, struct Position target, struct Tile*** map)
 {
     int t = 0;
     int x = 0;

@@ -10,7 +10,7 @@
 #include "Rogue.h"
 
 
-void mapDrawing()
+void mapDrawing(struct Tile*** map)
 {
     for (int y = 0; y < MAP_HEIGHT; y++)
     {
@@ -45,7 +45,7 @@ void entityDrawing(struct Entity* entity)
     }
 }
 
-void coinDrawing()
+void coinDrawing(struct Entity* coinArray)
 {
     for(int i = 0; i < COIN_COUNT; i++)
     {
@@ -57,18 +57,18 @@ void coinDrawing()
     }
 }
 
-void allDraw()
+void allDraw(struct Tile*** map, struct Position posStart, struct Entity* player, struct Entity* coinArray, struct Entity* orc, struct Entity* stairs)
 {
     clear();    // clears the screen before refreshing
-    mapDrawing(); // renders the game map
+    mapDrawing(map); // renders the game map
     entityDrawing(player);
-    coinDrawing(); // temporary testing function (replace later)
+    coinDrawing(coinArray); // temporary testing function (replace later)
     entityDrawing(orc); // orc is similar to player
     entityDrawing(stairs);
-    infoBoxDraw(); // UI element rendering for controls info
+    infoBoxDraw(player); // UI element rendering for controls info
 }
 
-void infoBoxDraw()
+void infoBoxDraw(struct Entity* player)
 {
         /*  Subwindow for printing game information */
     WINDOW* subwindow = newwin(13,30,5,100);

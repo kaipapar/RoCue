@@ -14,7 +14,7 @@ Create enemy entity
     inherits from entity struct, 
 
 */
-struct Entity* enemyCreation()
+struct Entity* enemyCreation(struct Tile*** map)
 {
     struct Entity* orc = calloc(1, sizeof(struct Entity));
 
@@ -42,7 +42,7 @@ struct Entity* enemyCreation()
     return orc;
 }
 
-void enemyPathFinding()
+void enemyPathFinding(struct Entity* orc, struct Entity* player, struct Tile*** map)
 {     //http://www.roguebasin.com/index.php/Quick_Pathfinding_in_a_Dungeon  
       //Find path between enemy and player, activated when orc sees player
     //  Using BFS

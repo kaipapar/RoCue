@@ -6,13 +6,6 @@
 #include "Rogue.h"
 
 int currentFloor = 0;
- 
-
-struct Entity* player;
-struct Tile*** map;
-struct Entity* coinArray;
-struct Entity* orc;
-struct Entity* stairs;
 
 /**
  * Sets up the run essential variables.
@@ -20,11 +13,8 @@ struct Entity* stairs;
 */
 int main()
 {   
-    struct Position posStart;
-    
     //int currentFloor = 0; //To be used in a future update
     //extern struct Floor* floorList; 
-
     
     setupCurses();
     
@@ -32,7 +22,7 @@ int main()
 	srand((unsigned) time(&t)); ///< Sets up the seed for random generation to start of epoch
 
     //floorList = generateFloor();
-
+/*
     map = mapTileCreation();
 
     posStart = mapSetup();  
@@ -44,10 +34,10 @@ int main()
     orc = enemyCreation();
 
     stairs = stairsCreation();
-
+*/
     menuDraw(); // --> Engine.c/Gameloop starts
 
-    quitGame();
+    //  quitGame(); nECESSARY?
 
     return 0;
 }

@@ -7,7 +7,7 @@
 
 #include "Rogue.h"
 
-struct Entity* coinCreation()
+struct Entity* coinCreation(struct Tile*** map)
 {
     int help = 0;   
     struct Entity* coinArray = calloc(COIN_COUNT, sizeof(struct Entity));

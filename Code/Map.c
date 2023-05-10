@@ -38,7 +38,7 @@ struct Tile*** mapTileCreation()
 }
 
 /*  Adding an area on the map to walk on    */
-struct Position mapSetup()
+struct Position mapSetup(struct Tile*** map)
 {
     int y = 0;
     int x = 0;
@@ -59,11 +59,11 @@ struct Position mapSetup()
         height = (rand() % 7) + 3;
         width = (rand() % 15) + 5;
         rooms[i] = roomCreation(y, x, height, width);
-        addRoomToMap(rooms[i]);
+        addRoomToMap(rooms[i], map);
 
         if (i > 0)
         {
-            roomConnections(rooms[i-1].center, rooms[i].center);
+            roomConnections(rooms[i-1].center, rooms[i].center, map);
         }
     }
 
@@ -76,12 +76,12 @@ struct Position mapSetup()
 }
 
 // Frees the map array from memory
-void releaseMap()
+void releaseMap(struct Tile*** map)
 {
     free(map[currentFloor]);
 }
 
-struct Entity* stairsCreation()
+struct Entity* stairsCreation(struct Tile*** map)
 {
     struct Entity* stairs = calloc(1, sizeof(struct Entity));
 

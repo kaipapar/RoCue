@@ -26,7 +26,12 @@ struct Entity* playerCreation(struct Position posStart)
 }
 
 /*  Handle user input */
-void inputHandling(int input)
+void inputHandling(int input, 
+                struct Entity* player, 
+                struct Tile*** map, 
+                struct Entity* coinArray, 
+                struct Entity* orc, 
+                struct Entity* stairs)
 {
     struct Position newPos = { player->pos.y, player->pos.x };
 
@@ -45,33 +50,42 @@ void inputHandling(int input)
             newPos.x++;
             break;
         case KEY_F(2):
-            quitGame();
+            quitGame(player, map);
             break;
         case 'i':
             // interact
-            interact();
+            interact(player, map, coinArray, orc, stairs);
             break;
         
         default:
             break;
     }
 
-    playerMovement(newPos);
+    playerMovement(newPos, player, map, coinArray, orc, stairs);
 }
 
 /*  Checks whether movement over a certain block is allowed */
-void playerMovement(struct Position newPos)
+void playerMovement(struct Position newPos, 
+                    struct Entity* player, 
+                    struct Tile*** map,
+                    struct Entity* coinArray,
+                    struct Entity* orc, 
+                    struct Entity* stairs)
 {
     if (map[currentFloor][newPos.y][newPos.x].walkable)
     {
-        clearFOV(player);
+        clearFOV(player, map, coinArray, orc, stairs);
         player->pos.y = newPos.y;
         player->pos.x = newPos.x;
-        createFOV(player);
+        createFOV(player, map, coinArray, orc, stairs);
     }
 }
 
-void interact()
+void interact(struct Entity* player, 
+                struct Tile*** map,
+                struct Entity* coinArray,
+                struct Entity* orc, 
+                struct Entity* stairs)
 {
     int dice = 0;
     for (int i = 0; i < COIN_COUNT+1; i++)
@@ -103,11 +117,11 @@ void interact()
                 currentFloor--;
             } 
             currentFloor++;
-            posStart = mapSetup();  
+            posStart = mapSetup(map);  
             player = playerCreation(posStart);
-            coinArray = coinCreation();
-            orc = enemyCreation();
-            stairs = stairsCreation();
+            coinArray = coinCreation(map);
+            orc = enemyCreation(map);
+            stairs = stairsCreation(map);
         }
     }
 }

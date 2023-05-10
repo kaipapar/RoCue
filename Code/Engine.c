@@ -24,7 +24,10 @@ void setupCurses()
         init_pair(SEEN_COLOR, COLOR_BLUE, COLOR_BLACK);
     }
 }
-
+/**
+ * Initializes game object and sets up game. Runs gameloop
+ *
+*/
 void gameLoop()
 {
     int ch = 45; // init as '0'
@@ -32,22 +35,32 @@ void gameLoop()
     int coinAmount = (rand() % 4) + 2;
     struct Entity* coins = coinCreation(coinAmount);
 */
-    createFOV(player);
+    struct Tile*** map = mapTileCreation();
+
+    struct Position posStart = mapSetup(map);  
+
+    struct Entity* player = playerCreation(posStart);
+
+    struct Entity* coinArray = coinCreation(map);
+    
+    struct Entity* orc = enemyCreation(map);
+
+    struct Entity* stairs = stairsCreation(map);
+    createFOV(player, map, coinArray, orc, stairs);
     //menuDraw();
-    allDraw();
+    allDraw(map, posStart, player, coinArray, orc, stairs);
     
     while(true)
     {       
-
         ch = getch();   
         if(ch == KEY_F(2))
         {
             break;
-            quitGame();
+            quitGame(player, map);
             endwin();
         }
-        inputHandling(ch);
-        allDraw();
+        inputHandling(ch, player, map, coinArray, orc, stairs);
+        allDraw(map, posStart, player, coinArray, orc, stairs);
         /*
         if (gameOver())
         {
@@ -68,9 +81,10 @@ bool gameOver()
     }
 }
 */
-void quitGame()
+void quitGame(struct Entity* player, struct Tile*** map)
 {
-    endwin();
     free(player);
-    releaseMap();
+    releaseMap(map);
+    endwin();
+    exit(1);
 }

@@ -86,7 +86,9 @@ void menuDraw()
 				free_item(myItems[0]);
 				free_item(myItems[1]);
 				//free_menu(my_menu);
-                quitGame();
+                //quitGame();
+                endwin();
+                exit(1);
 				break;
 		}
 	}
