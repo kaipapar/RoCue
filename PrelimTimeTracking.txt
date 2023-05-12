@@ -7,4 +7,7 @@
     11-14 -- Project plan, starting localization, stairs to other way, planning floor struct
     15:30- 18:05 -- Kaipapar. localization done, floorArray underway
 12.5.23 floorArray stuff - Kaipapar
-    12:30-x -- Thinkin about program architecture, writing current problems
+    12:30-16:54 -- Thinkin about program architecture, writing current problems
+                    Localized variables except current floor but that shouldn't be hard to include
+                    finished floorstruct for now, commented a lot, added proper memory management
+                    among other things.
