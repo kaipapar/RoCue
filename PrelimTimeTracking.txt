@@ -6,3 +6,5 @@
 10.5.23 Project environment polishing - Kaipapar, Neettan
     11-14 -- Project plan, starting localization, stairs to other way, planning floor struct
     15:30- 18:05 -- Kaipapar. localization done, floorArray underway
+12.5.23 floorArray stuff - Kaipapar
+    12:30-x -- Thinkin about program architecture, writing current problems

@@ -1,42 +1,52 @@
-/*
-@File    :   Map.c
-@Time    :   14.04.2023 18:28:12
-@Author  :   Karri Korsu, Nestori Heiskanen
-@Version :   1.0
-@Contact :   karri.korsu@edu.turkuamk.fi
-@Desc    :   None
+/**
+*@file    :   Map.c
+*@time    :   14.04.2023 18:28:12
+*@author  :   Karri Korsu, Nestori Heiskanen
+*@version :   1.0
+*@contact :   karri.korsu@edu.turkuamk.fi
+*@description:   None
 */
 
 
 #include "Rogue.h"
 
-/*  Creates a 3d array of tiles for the map, returns pointer to pointer to pointer*/
+/**
+ *   Creates a 2d array of tiles for the map, returns pointer to pointer
+ */
 struct Tile** mapTileCreation()
 {
     struct Tile** tiles = calloc(MAP_HEIGHT, sizeof(struct Tile**));
+    EC((struct Tile**) tiles);
 
+    tiles = calloc(MAP_WIDTH, sizeof(struct Tile*));
+    EC((struct Tile*) tiles);
+    for (int y = 0; y < MAP_HEIGHT; y++)
+    {
+        // how does this work. tiles = map_width x pointers to tiles.
+        // tiles[y] --> one tile from those tiles?? Why calloc?
+        // isn't this like saying int x = calloc(1, sizeof(int))
+        tiles[y] = calloc(MAP_WIDTH, sizeof(struct Tile)); 
+        //EC((struct Tile) tiles[y]);
 
-        tiles = calloc(MAP_WIDTH, sizeof(struct Tile*));
-        for (int y = 0; y < MAP_HEIGHT; y++)
+        for (int x = 0; x < MAP_WIDTH; x++)
         {
-            tiles[y] = calloc(MAP_WIDTH, sizeof(struct Tile));
-
-            for (int x = 0; x < MAP_WIDTH; x++)
-            {
-                tiles[y][x].ch = '#';   // walls
-                tiles[y][x].color = COLOR_PAIR(VISIBLE_COLOR);
-                tiles[y][x].walkable = false;
-                tiles[y][x].transparent = false;
-                tiles[y][x].visible = false;
-                tiles[y][x].seen = false;
-                tiles[y][x].found = 0;
-            }
+            tiles[y][x].ch = '#';   // walls
+            tiles[y][x].color = COLOR_PAIR(VISIBLE_COLOR);
+            tiles[y][x].walkable = false;
+            tiles[y][x].transparent = false;
+            tiles[y][x].visible = false;
+            tiles[y][x].seen = false;
+            tiles[y][x].found = 0;
         }
+    }
     return tiles;
 }
 
-/*  Adding an area on the map to walk on    */
+/**
+ * Adding an area on the map to walk on
+*/
 struct Room* mapSetup(struct Tile** map)
+// #accessthroughpointers
 {
     int y = 0;
     int x = 0;
@@ -76,20 +86,10 @@ struct Position getStartPos(struct Room* rooms)
     return posStart;
 }
 
-
-// Frees the map array from memory
-void releaseFloors(struct Tile** map, int size)
-{
-    for (int i = 0; i < size; i++)
-    {
-        free(map);
-    }
-}
-
 struct Entity* stairsCreation(struct Tile** map)
 {
     struct Entity* stairs = calloc(1, sizeof(struct Entity));
-
+    EC((struct Entity*) stairs);
     stairs -> ch = '<';
     stairs -> color = COLOR_PAIR(COIN_COLOR);
     stairs -> visible = true;

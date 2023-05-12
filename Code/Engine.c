@@ -35,38 +35,15 @@ void setupCurses()
 void gameLoop()
 {
     int ch = 45; // init as '0'
-/*
-    int coinAmount = (rand() % 4) + 2;
-    struct Entity* coins = coinCreation(coinAmount);
-*/
 
     struct Floor* floorArray = floorArrayCreation();
 
-    struct Position posStart = getStartPos(floorArray[currentFloor].rooms);  
+    struct Position posStart = getStartPos(floorArray[currentFloor].rooms); // Is this ok? or is a local .rooms made? Does it matter? Does anything matter?  
 
     struct Entity* player = playerCreation(posStart);
-/*    
-    struct Tile** map = mapTileCreation();
-    
-    struct Entity* coinArray = coinCreation(map);
-    
-    struct Entity* orc = enemyCreation(map);
 
-    struct Entity* stairs = stairsCreation(map);
-*/
-
-    createFOV(player, 
-                floorArray[currentFloor].map, 
-                floorArray[currentFloor].coinArray, 
-                floorArray[currentFloor].orc, 
-                floorArray[currentFloor].stairs);
-    //menuDraw();
-    allDraw(floorArray[currentFloor].map, 
-            posStart, 
-            player, 
-            floorArray[currentFloor].coinArray, 
-            floorArray[currentFloor].orc, 
-            floorArray[currentFloor].stairs);
+    createFOV(player, floorArray, currentFloor);
+    allDraw(posStart, player, floorArray, currentFloor);
     
     while(true)
     {       
@@ -75,29 +52,23 @@ void gameLoop()
         {
             break;
             quitGame(player, floorArray);
-            endwin();
         }
         inputHandling(ch, 
                         player, 
-                        floorArray[currentFloor].map, 
-                        floorArray[currentFloor].coinArray, 
-                        floorArray[currentFloor].orc, 
-                        floorArray[currentFloor].stairs);
-        allDraw(floorArray[currentFloor].map, 
-                posStart, 
-                player, 
-                floorArray[currentFloor].coinArray, 
-                floorArray[currentFloor].orc, 
-                floorArray[currentFloor].stairs);
-        /*
-        if (gameOver())
+                        floorArray, currentFloor);
+        allDraw(posStart, player, floorArray, currentFloor);
+        
+        
+        if (gameOver(player))
         {
             break;
-        }*/
+        }
     }
 }
-/*
-bool gameOver()
+/**
+ * Not fully implemented yet, but should work.
+*/
+bool gameOver(struct Entity* player)
 {
     if (player->points < 0)
     {
@@ -108,19 +79,31 @@ bool gameOver()
         return false;
     }
 }
+
+/**
+ * frees allocated memory, exits ncurses, exits program.
 */
-void quitGame(struct Entity* player, struct Tile** map)
+void quitGame(struct Entity* player, struct Floor* floorArray)
 {
+    //It is questionable whether free() works now but this is a shot at it
+    // free queue also when it is implemented
     free(player);
-    releaseFloors(map, MAP_DEPTH);
+    for (int i = 0; i<MAP_DEPTH; i++)
+    {
+        free(floorArray[i].orc);
+        free(floorArray[i].stairs);
+        free(floorArray[i].coinArray);
+        free(floorArray[i].map);
+    }
+    free(floorArray);
     endwin();
     exit(1);
 }
 
 /**
- * Error Checking function for pointers
+ * Error Checking function for pointers, use with all mem allocation
 */
-void *EC(void *pointer)
+void EC(void *pointer)
 {
 	if (pointer == NULL)
 	{

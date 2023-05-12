@@ -45,26 +45,32 @@ void entityDrawing(struct Entity* entity)
     }
 }
 
-void coinDrawing(struct Entity* coinArray)
+/**
+ * @brief A function which renders an array of entities, eg. coinArray
+ * @param[in] entityArray : placeholder for any array of similar entities
+ * @param[in] entityCount : getting the size of the array as argument is best practises
+*/
+void entitiesDrawing(struct Entity* entityArray, int entityCount)
 {
-    for(int i = 0; i < COIN_COUNT; i++)
+    for(int i = 0; i < entityCount; i++)
     {
-        if ((coinArray + i)->visible == true)
+        if ((entityArray + i)->visible == true)
         {
-        mvaddch((coinArray + i) -> pos.y, (coinArray + i) -> pos.x, (coinArray + i) -> ch | (coinArray + i)-> color);
+            mvaddch((entityArray + i) -> pos.y, 
+                    (entityArray + i) -> pos.x, 
+                    (entityArray + i) -> ch | (entityArray + i)-> color);
         }
-
     }
 }
 
-void allDraw(struct Tile** map, struct Position posStart, struct Entity* player, struct Entity* coinArray, struct Entity* orc, struct Entity* stairs)
+void allDraw(struct Position posStart, struct Entity* player, struct Floor* floorArray, int currentFloor)
 {
     clear();    // clears the screen before refreshing
-    mapDrawing(map); // renders the game map
+    mapDrawing(floorArray[currentFloor].map); // renders the game map
     entityDrawing(player);
-    coinDrawing(coinArray); // temporary testing function (replace later)
-    entityDrawing(orc); // orc is similar to player
-    entityDrawing(stairs);
+    entitiesDrawing(floorArray[currentFloor].coinArray, COIN_COUNT); // temporary testing function (replace later)
+    entityDrawing(floorArray[currentFloor].orc); // orc is similar to player
+    entityDrawing(floorArray[currentFloor].stairs);
     infoBoxDraw(player); // UI element rendering for controls info
 }
 

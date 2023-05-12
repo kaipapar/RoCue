@@ -7,7 +7,7 @@
 @Desc    :   None
 */
 #include "Rogue.h"
-/*  Enemy creation, pathfinding, interaction with player    */
+/** @file  Enemy creation, pathfinding, interaction with player    */
 
 /*
 Create enemy entity
@@ -17,6 +17,7 @@ Create enemy entity
 struct Entity* enemyCreation(struct Tile** map)
 {
     struct Entity* orc = calloc(1, sizeof(struct Entity));
+    EC((struct Entity*) orc);
 
     orc -> ch = 'O';
     orc -> color = COLOR_PAIR(COIN_COLOR);

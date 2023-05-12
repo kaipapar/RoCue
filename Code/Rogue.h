@@ -28,7 +28,7 @@ Description:    Header for rogue tutorial
 #define COIN_COLOR 1
 
 //  macros for map dimensions
-#define MAP_DEPTH 7
+#define MAP_DEPTH 6
 #define MAP_HEIGHT 25
 #define MAP_WIDTH 100
 
@@ -103,11 +103,11 @@ struct Floor
 {
     /// @brief map related 
     struct Tile** map;
-    struct Room* rooms;
-    struct Entity* stairs; 
+    struct Room* rooms;     // do these need their own pointers  
+    struct Entity* stairs;  // if they are only accessed through Floor?
 
     /// @brief entities   
-    struct Entity* orc;
+    struct Entity* orc; 
     struct Entity* coinArray;
 
 };
@@ -115,47 +115,29 @@ struct Floor
 // Draw.c
 void mapDrawing(struct Tile** map);
 void entityDrawing(struct Entity* entity);
-void allDraw(struct Tile** map, 
-                struct Position posStart, 
-                struct Entity* player, 
-                struct Entity* coinArray, 
-                struct Entity* orc, 
-                struct Entity* stairs);
+void entitiesDrawing(struct Entity* entityArray, int entityCount);
+void allDraw(struct Position posStart, struct Entity* player, struct Floor* floorArray, int currentFloor);
 void infoBoxDraw(struct Entity* player);
-void menuDraw();
 
 // Engine.c
 void setupCurses();
 void gameLoop(); ///< Initializes all variables
-void quitGame(struct Entity* player, struct Tile** map);
-void *EC(void *pointer); 
+bool gameOver(struct Entity* player);
+void quitGame(struct Entity* player, struct Floor* floorArray); ///< Doesn't take currentFloor as argument because all floors are freed
+void EC(void *pointer); 
 
 // Map.c
 struct Tile** mapTileCreation();
 struct Room* mapSetup(struct Tile** map);
 struct Position getStartPos(struct Room* rooms);
-void releaseMap(struct Tile** map);
 struct Entity* stairsCreation(struct Tile** map);
 
 // Player.c
 struct Entity* playerCreation(struct Position posStart);
-void inputHandling(int input, 
-                    struct Entity* player, 
-                    struct Tile** map,
-                    struct Entity* coinArray, 
-                    struct Entity* orc, 
-                    struct Entity* stairs);
-void playerMovement(struct Position newPos, 
-                    struct Entity* player, 
-                    struct Tile** map,
-                    struct Entity* coinArray,
-                    struct Entity* orc, 
-                    struct Entity* stairs);
-void interact(struct Entity* player, 
-                struct Tile** map,
-                struct Entity* coinArray,
-                struct Entity* orc, 
-                struct Entity* stairs);
+void inputHandling(int input, struct Entity* player, struct Floor* floorArray, int currentFloor);
+void playerMovement(struct Position newPos, struct Entity* player, struct Floor* floorArray, int currentFloor);
+void interact(struct Entity* player, struct Floor* floorArray, int currentFloor);
+void changeFloor(int currentFloor, int floorChange);
 
 // Room.c
 struct Room roomCreation(int y, int x, int height, int width);
@@ -163,16 +145,8 @@ void addRoomToMap(struct Room room, struct Tile** map);
 void roomConnections(struct Position centerSelf, struct Position centerOther, struct Tile** map);
 
 // Fov.c
-void createFOV(struct Entity* player, 
-                struct Tile** map, 
-                struct Entity* coinArray,
-                struct Entity* orc, 
-                struct Entity* stairs);
-void clearFOV(struct Entity* player, 
-                struct Tile** map, 
-                struct Entity* coinArray, 
-                struct Entity* orc, 
-                struct Entity* stairs);
+void createFOV(struct Entity* player, struct Floor* floorArray, int currentFloor);
+void clearFOV(struct Entity* player, struct Floor* floorArray, int currentFloor);
 int getDistance(struct Position origin, struct Position target);
 bool isInMap(int y, int x);
 bool lineOfSight(struct Position origin, struct Position target, struct Tile** map);
@@ -196,6 +170,9 @@ void visit(struct Queue *queue);
 
 // Floors.c
 struct Floor* floorArrayCreation();
+
+//MenuUnix.c
+void menuDraw();
 
 extern int currentFloor;
 

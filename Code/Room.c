@@ -8,7 +8,10 @@
 */
 
 #include "Rogue.h"
-
+/**
+ * This is ok to not return a pointer since 
+ * the return is used locally in Map.c
+*/
 struct Room roomCreation(int y, int x, int height, int width)
 {
     struct Room newRoom;

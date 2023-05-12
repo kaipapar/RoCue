@@ -1,17 +1,18 @@
-/*
-@File       :       Items.c
-@Author     :       Joona Luttinen
-@Version    :       1.0
-@Description:       creates all needed items
+/**
+*@file       :       Items.c
+*@author     :       Joona Luttinen
+*@version    :       1.0
+*@description:       creates all needed items
 */
 
 #include "Rogue.h"
 
 struct Entity* coinCreation(struct Tile** map)
+// #accessthroughpointer not good on map
 {
     int help = 0;   
     struct Entity* coinArray = calloc(COIN_COUNT, sizeof(struct Entity));
-
+    EC((struct Entity*) coinArray);
     for(int i = 0; i < COIN_COUNT; i++)
     {
         (coinArray + i) -> ch = 'C';

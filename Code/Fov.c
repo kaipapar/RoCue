@@ -8,11 +8,7 @@
 */
 #include "Rogue.h"
 
-void createFOV(struct Entity* player, 
-                struct Tile** map, 
-                struct Entity* coinArray, 
-                struct Entity* orc, 
-                struct Entity* stairs)
+void createFOV(struct Entity* player, struct Floor* floorArray, int currentFloor)
 {
     int y = 0;
     int x = 0;
@@ -20,8 +16,8 @@ void createFOV(struct Entity* player,
     int radius = 15; // draw distance of the player
     struct Position target;
 
-    map[player->pos.y][player->pos.x].visible = true;
-    map[player->pos.y][player->pos.x].seen = true;
+    floorArray[currentFloor].map[player->pos.y][player->pos.x].visible = true;
+    floorArray[currentFloor].map[player->pos.y][player->pos.x].seen = true;
 
     for (y = player->pos.y - radius; y < player->pos.y + radius; y++)
     {
@@ -32,37 +28,39 @@ void createFOV(struct Entity* player,
             distance = getDistance(player->pos, target);
             //printf("Target y: %d, target x: %d, player y, player x, distance");
 
-            if (distance < radius && isInMap(y, x) && lineOfSight(player->pos, target, map))
+            if (distance < radius && isInMap(y, x) && lineOfSight(player->pos, target, floorArray[currentFloor].map))
             {
-                map[y][x].visible = true;
-                map[y][x].seen = true;
+                floorArray[currentFloor].map[y][x].visible = true;
+                floorArray[currentFloor].map[y][x].seen = true;
                 for (int i = 0; i < COIN_COUNT; i++)
                 {
-                    if ((coinArray + i)->pos.y == y && (coinArray + i)->pos.x == x && (coinArray + i)->collected == false) 
+                    if ((floorArray[currentFloor].coinArray + i)->pos.y == y 
+                        && (floorArray[currentFloor].coinArray + i)->pos.x == x 
+                        && (floorArray[currentFloor].coinArray + i)->collected == false) 
                     {   //if there is a coin at these x,y coordinates
-                        (coinArray + i)->visible = true;
+                        (floorArray[currentFloor].coinArray + i)->visible = true;
                     }
                 }
 
-                if (orc -> pos.y == y && orc -> pos.x == x && orc->collected == false)
+                if (floorArray[currentFloor].orc -> pos.y == y 
+                    && floorArray[currentFloor].orc -> pos.x == x 
+                    && floorArray[currentFloor].orc->collected == false)
                 {
-                    orc -> visible = true;
+                    floorArray[currentFloor].orc -> visible = true;
                 }
 
-                if (stairs -> pos.y == y && stairs -> pos.x == x && stairs->collected == false)
+                if (floorArray[currentFloor].stairs -> pos.y == y 
+                    && floorArray[currentFloor].stairs -> pos.x == x 
+                    && floorArray[currentFloor].stairs->collected == false)
                 {
-                    stairs -> visible = true;
+                    floorArray[currentFloor].stairs -> visible = true;
                 }
             }/*  Yes I know there is 3 nested for loops  */
         }
     }
 }
 
-void clearFOV(struct Entity* player, 
-                struct Tile** map, 
-                struct Entity* coinArray, 
-                struct Entity* orc, 
-                struct Entity* stairs)
+void clearFOV(struct Entity* player, struct Floor* floorArray, int currentFloor)
 {
     int y = 0;
     int x = 0;
@@ -74,7 +72,7 @@ void clearFOV(struct Entity* player,
         {
             if (isInMap(y,x))
             {
-                map[y][x].visible = false;
+                floorArray[currentFloor].map[y][x].visible = false;
 
                 /*  clear fov of coins  */
                 for (int i = 0; i < COIN_COUNT; i++)
@@ -83,20 +81,23 @@ void clearFOV(struct Entity* player,
                     {   //if there is a coin at these x,y coordinates
                         (coinArray + i)->visible = false;
                     }*/
-                    if ((coinArray + i)->pos.y == y && (coinArray + i)->pos.x == x)
+                    if ((floorArray[currentFloor].coinArray + i)->pos.y == y 
+                        && (floorArray[currentFloor].coinArray + i)->pos.x == x)
                     {
-                        (coinArray + i)->visible = false;
+                        (floorArray[currentFloor].coinArray + i)->visible = false;
                     }
                 }   
 
                 /*  Clear fov of orc */
-                if (orc -> pos.y == y && orc -> pos.x == x)
+                if (floorArray[currentFloor].orc -> pos.y == y 
+                    && floorArray[currentFloor].orc -> pos.x == x)
                 {
-                    orc -> visible = false;
+                    floorArray[currentFloor].orc -> visible = false;
                 }
-                if (stairs -> pos.y == y && stairs -> pos.x == x)
+                if (floorArray[currentFloor].stairs -> pos.y == y 
+                    && floorArray[currentFloor].stairs -> pos.x == x)
                 {
-                    stairs -> visible = false;
+                    floorArray[currentFloor].stairs -> visible = false;
                 }
             }
         }
@@ -126,7 +127,11 @@ bool isInMap(int y, int x)
     return false;
 }
 
-bool lineOfSight(struct Position origin, struct Position target, struct Tile** map)
+bool lineOfSight(struct Position origin, struct Position target, struct Tile** map) 
+// here accessing the map array through a pointer and not directly from the floorArray 
+// is questionable. This way is better code in terms of readibility 
+// and obfuscation but not in terms of performance... difficult matters
+// #accessthroughpointer
 {
     int t = 0;
     int x = 0;

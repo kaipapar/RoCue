@@ -8,12 +8,14 @@
 */
 #include "Rogue.h"
 
-struct Position posStart;
-/*                       CREATE CUSTOM  STRUCT FOR PLAYER WHICH INHERITS ENTITY STRUCT       */
+//struct Position posStart; // ???
+/**
+ * CREATE CUSTOM STRUCT FOR PLAYER WHICH 'INHERITS' ENTITY STRUCT
+ */
 struct Entity* playerCreation(struct Position posStart)
 {
     struct Entity* newPlayer = calloc(1, sizeof(struct Entity)); //correct use of calloc?
-
+    EC((struct Entity*) newPlayer);
     newPlayer->pos.y = posStart.y;
     newPlayer->pos.x = posStart.x;
     newPlayer->color = COLOR_PAIR(VISIBLE_COLOR);
@@ -26,12 +28,8 @@ struct Entity* playerCreation(struct Position posStart)
 }
 
 /*  Handle user input */
-void inputHandling(int input, 
-                struct Entity* player, 
-                struct Tile** map, 
-                struct Entity* coinArray, 
-                struct Entity* orc, 
-                struct Entity* stairs)
+void inputHandling(int input, struct Entity* player, 
+                    struct Floor* floorArray, int currentFloor)
 {
     struct Position newPos = { player->pos.y, player->pos.x };
 
@@ -50,53 +48,48 @@ void inputHandling(int input,
             newPos.x++;
             break;
         case KEY_F(2):
-            quitGame(player, map);
+            quitGame(player, floorArray);
             break;
         case 'i':
             // interact
-            interact(player, map, coinArray, orc, stairs);
+            interact(player, floorArray, currentFloor);
             break;
         
         default:
             break;
     }
 
-    playerMovement(newPos, player, map, coinArray, orc, stairs);
+    playerMovement(newPos, player, floorArray, currentFloor);
 }
 
 /*  Checks whether movement over a certain block is allowed */
 void playerMovement(struct Position newPos, 
-                    struct Entity* player, 
-                    struct Tile** map,
-                    struct Entity* coinArray,
-                    struct Entity* orc, 
-                    struct Entity* stairs)
+                    struct Entity* player, struct Floor* floorArray, int currentFloor)
 {
-    if (map[newPos.y][newPos.x].walkable)
+    if (floorArray[currentFloor].map[newPos.y][newPos.x].walkable)
     {
-        clearFOV(player, map, coinArray, orc, stairs);
+        clearFOV(player, floorArray, currentFloor);
         player->pos.y = newPos.y;
         player->pos.x = newPos.x;
-        createFOV(player, map, coinArray, orc, stairs);
+        createFOV(player, floorArray, currentFloor);
     }
 }
 
-void interact(struct Entity* player, 
-                struct Tile** map,
-                struct Entity* coinArray,
-                struct Entity* orc, 
-                struct Entity* stairs)
+void interact(struct Entity* player, struct Floor* floorArray, int currentFloor)
 {
     int dice = 0;
     for (int i = 0; i < COIN_COUNT+1; i++)
     {
-        if (player->pos.y == (coinArray + i)->pos.y && player->pos.x == (coinArray + i)->pos.x)
+        if (player->pos.y == (floorArray[currentFloor].coinArray + i)->pos.y 
+            && player->pos.x == (floorArray[currentFloor].coinArray + i)->pos.x)
         {
-            player->points += (coinArray + i)->value;
-            (coinArray + i)-> visible = false;
-            (coinArray + i)-> collected = true;
+            player->points += (floorArray[currentFloor].coinArray + i)->value;
+            (floorArray[currentFloor].coinArray + i)-> visible = false;
+            (floorArray[currentFloor].coinArray + i)-> collected = true;
         }
-        else if (player->pos.y == orc->pos.y && player->pos.x == orc->pos.x && orc->collected == false)
+        else if (player->pos.y == floorArray[currentFloor].orc->pos.y 
+                && player->pos.x == floorArray[currentFloor].orc->pos.x 
+                && floorArray[currentFloor].orc->collected == false)
         {
             dice = rand() % 20;
             if (dice < 10)
@@ -105,18 +98,29 @@ void interact(struct Entity* player,
             }
             else
             {
-                orc->points -= 300;
+                floorArray[currentFloor].orc->points -= 300;
             }
-            orc->collected = true;
+            floorArray[currentFloor].orc->collected = true;
         }
     //____________________________________
-        else if (player->pos.y == stairs->pos.y && player->pos.x == stairs->pos.x)
+        else if (player->pos.y == floorArray[currentFloor].stairs->pos.y 
+                && player->pos.x == floorArray[currentFloor].stairs->pos.x)
         {
-            if (currentFloor == 6)
-            {
-                currentFloor--;
-            } 
+            //changeFloor(currentFloor,1);
             currentFloor++;
         }
+    }
+}
+
+/**
+ * @brief Function which changes floors either up or down
+ * @param[in] floorChange : negative or positive integer which states how many floors we want to go up or down.
+*/
+void changeFloor(int currentFloor, int floorChange)
+{
+    int newFloor = currentFloor + floorChange;
+    if (newFloor < MAP_DEPTH && 0 < newFloor)
+    {
+        currentFloor = newFloor;
     }
 }
