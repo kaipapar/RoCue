@@ -6,7 +6,11 @@
 @Contact :   karri.korsu@edu.turkuamk.fi
 @Desc    :   None
 */
-
+/**
+ * @file Engine.c
+ * @brief Initializes game and starts game loop. 
+ * @authors Karri Korsu, Nestori Heiskanen 
+*/
 #include "Rogue.h"
 
 void setupCurses()

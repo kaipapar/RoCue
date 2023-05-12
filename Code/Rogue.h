@@ -197,15 +197,6 @@ void visit(struct Queue *queue);
 // Floors.c
 struct Floor* floorArrayCreation();
 
-/*
-extern struct Entity* player;  // are externs good policy?
-extern struct Tile** map;
-
-extern struct Entity* coinArray;
-extern struct Entity* orc;
-extern struct Entity* stairs;
-*/
-
 extern int currentFloor;
 
 //extern struct Position posStart;

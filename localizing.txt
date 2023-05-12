@@ -14,4 +14,10 @@ all relevant data for a floor:
     
 2. create a array of x floor structs --> this is how the z coordinate is replaced
 3. make all data flow _nice_
+4. best case --> fimctopms tjat meed 
 
+
+problems:
+1. Stairs don't go through FOV, seen always.   
+2. weird glitch: while moving a terminal cursor looking character flashes in different places on the map. Memory leak? It does this also on the points board.
+3. When interacting with stairs the game jumps from floor 0 -> 6

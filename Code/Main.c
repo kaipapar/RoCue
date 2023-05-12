@@ -12,32 +12,14 @@ int currentFloor = 0;
  * 
 */
 int main()
-{   
-    //int currentFloor = 0; //To be used in a future update
-    //extern struct Floor* floorList; 
-    
-    setupCurses();
+{     
+    setupCurses(); ///< Sets up Ncurses rendering.
     
     time_t t = 0; 
-	srand((unsigned) time(&t)); ///< Sets up the seed for random generation to start of epoch
-
-    //floorList = generateFloor();
-/*
-    map = mapTileCreation();
-
-    posStart = mapSetup();  
-
-    player = playerCreation(posStart);
-
-    coinArray = coinCreation();
+    unsigned seed = time(&t); ///< Sets up the seed for random generation to start of epoch
+	srand(seed); ///< Randomization seeded!
     
-    orc = enemyCreation();
-
-    stairs = stairsCreation();
-*/
     menuDraw(); // --> Engine.c/Gameloop starts
-
-    //  quitGame(); nECESSARY?
 
     return 0;
 }
