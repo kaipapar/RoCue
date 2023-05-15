@@ -28,7 +28,7 @@ Description:    Header for rogue tutorial
 #define COIN_COLOR 1
 
 //  macros for map dimensions
-#define MAP_DEPTH 6
+#define MAP_DEPTH 25
 #define MAP_HEIGHT 25
 #define MAP_WIDTH 100
 
