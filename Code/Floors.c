@@ -22,6 +22,7 @@ struct Floor* floorArrayCreation()
             floorArray[i].map = mapTileCreation();
             floorArray[i].rooms = mapSetup(floorArray[i].map);
             floorArray[i].stairs = stairsCreation(floorArray[i].map);
+            floorArray[i].posStart = getStartPos(floorArray[i].rooms);
 
 
             floorArray[i].coinArray = coinCreation(floorArray[i].map);            

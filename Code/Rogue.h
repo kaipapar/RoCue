@@ -105,6 +105,7 @@ struct Floor
     struct Tile** map;
     struct Room* rooms;     // do these need their own pointers  
     struct Entity* stairs;  // if they are only accessed through Floor?
+    struct Position posStart; 
 
     /// @brief entities   
     struct Entity* orc; 
@@ -116,7 +117,7 @@ struct Floor
 void mapDrawing(struct Tile** map);
 void entityDrawing(struct Entity* entity);
 void entitiesDrawing(struct Entity* entityArray, int entityCount);
-void allDraw(struct Position posStart, struct Entity* player, struct Floor* floorArray, int currentFloor);
+void allDraw(struct Entity* player, struct Floor* floorArray, int currentFloor);
 void infoBoxDraw(struct Entity* player);
 
 // Engine.c
@@ -136,8 +137,8 @@ struct Entity* stairsCreation(struct Tile** map);
 struct Entity* playerCreation(struct Position posStart);
 void inputHandling(int input, struct Entity* player, struct Floor* floorArray, int currentFloor);
 void playerMovement(struct Position newPos, struct Entity* player, struct Floor* floorArray, int currentFloor);
-void interact(struct Entity* player, struct Floor* floorArray, int currentFloor);
-void changeFloor(int currentFloor, int floorChange);
+void interact(struct Entity* player, struct Floor* floorArray);
+void changeFloor(int floorChange);
 
 // Room.c
 struct Room roomCreation(int y, int x, int height, int width);

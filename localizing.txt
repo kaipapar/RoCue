@@ -29,11 +29,16 @@ all relevant data for a floor:
     If every function requiring a member of floorStruct just takes floorStruct and currentFlor as its arguments it might be confusing as 
     to what we are actually doing in that function.
 
+
+
 problems:
 1. Stairs don't go through FOV, seen always.   
 2. weird glitch: while moving a terminal cursor looking character flashes
     in different places on the map. Memory leak? It does this also on the points board.
-        doesn't happen currently (15:00, 15.5.23)
+    -->doesn't happen currently (15:00, 15.5.23)
 3. When interacting with stairs the game jumps from floor 0 -> 6
 4. I don't think posStart works properly. Sometimes spawns player in walls on other floors than 0.
 5. No interaction with stairs. Other interaction works. (15.5.)
+    --> I think a local version of currentFloor was made in interact(), 
+    I removed currentFloor as an argument and it works. 
+6. Compiles reaally slow!?

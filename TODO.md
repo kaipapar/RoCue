@@ -43,7 +43,9 @@ priority flags: 1 = low priority,
 - [] Localize currentFloor
 - [] fix bug in floorStruct-branch where the floors don't change.
 
-
+15.5.23
+- [-] Make posStart = location of stairs.
+    - [] I've now made posStart a member of floorStruct but it doesn't update the players position for some reason. 
 
 ### Completed [x]
 12.5.23

@@ -63,7 +63,7 @@ void entitiesDrawing(struct Entity* entityArray, int entityCount)
     }
 }
 
-void allDraw(struct Position posStart, struct Entity* player, struct Floor* floorArray, int currentFloor)
+void allDraw(struct Entity* player, struct Floor* floorArray, int currentFloor)
 {
     clear();    // clears the screen before refreshing
     mapDrawing(floorArray[currentFloor].map); // renders the game map

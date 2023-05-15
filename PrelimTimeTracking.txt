@@ -11,3 +11,6 @@
                     Localized variables except current floor but that shouldn't be hard to include
                     finished floorstruct for now, commented a lot, added proper memory management
                     among other things.
+15.5.23 floorStruct fine tuning - Kaipapar
+    15:00-15:40 -- Tweaking parameters and figuring out 
+                    interaction with stairs and trying not to spawn into walls..

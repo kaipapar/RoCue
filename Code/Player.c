@@ -52,7 +52,7 @@ void inputHandling(int input, struct Entity* player,
             break;
         case 'i':
             // interact
-            interact(player, floorArray, currentFloor);
+            interact(player, floorArray);
             break;
         
         default:
@@ -75,7 +75,7 @@ void playerMovement(struct Position newPos,
     }
 }
 
-void interact(struct Entity* player, struct Floor* floorArray, int currentFloor)
+void interact(struct Entity* player, struct Floor* floorArray)
 {
     int dice = 0;
     for (int i = 0; i < COIN_COUNT+1; i++)
@@ -102,13 +102,15 @@ void interact(struct Entity* player, struct Floor* floorArray, int currentFloor)
             }
             floorArray[currentFloor].orc->collected = true;
         }
+    }
     //____________________________________
-        else if (player->pos.y == floorArray[currentFloor].stairs->pos.y 
-                && player->pos.x == floorArray[currentFloor].stairs->pos.x)
-        {
-            //changeFloor(currentFloor,1);
-            currentFloor++;
-        }
+    if (player->pos.y == floorArray[currentFloor].stairs->pos.y 
+            && player->pos.x == floorArray[currentFloor].stairs->pos.x)
+    {
+        changeFloor(1);
+        playerMovement(floorArray[currentFloor].posStart, player, floorArray, currentFloor);
+
+        //currentFloor++;
     }
 }
 
@@ -116,11 +118,12 @@ void interact(struct Entity* player, struct Floor* floorArray, int currentFloor)
  * @brief Function which changes floors either up or down
  * @param[in] floorChange : negative or positive integer which states how many floors we want to go up or down.
 */
-void changeFloor(int currentFloor, int floorChange)
+void changeFloor(int floorChange)
 {
     int newFloor = currentFloor + floorChange;
     if (newFloor < MAP_DEPTH && 0 < newFloor)
     {
         currentFloor = newFloor;
+
     }
 }

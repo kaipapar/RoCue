@@ -38,12 +38,12 @@ void gameLoop()
 
     struct Floor* floorArray = floorArrayCreation();
 
-    struct Position posStart = getStartPos(floorArray[currentFloor].rooms); // Is this ok? or is a local .rooms made? Does it matter? Does anything matter?  
+    //struct Position posStart = getStartPos(floorArray[currentFloor].rooms); // Is this ok? or is a local .rooms made? Does it matter? Does anything matter?  
 
-    struct Entity* player = playerCreation(posStart);
+    struct Entity* player = playerCreation(floorArray[currentFloor].posStart);
 
     createFOV(player, floorArray, currentFloor);
-    allDraw(posStart, player, floorArray, currentFloor);
+    allDraw(player, floorArray, currentFloor);
     
     while(true)
     {       
@@ -56,7 +56,7 @@ void gameLoop()
         inputHandling(ch, 
                         player, 
                         floorArray, currentFloor);
-        allDraw(posStart, player, floorArray, currentFloor);
+        allDraw(player, floorArray, currentFloor);
         
         
         if (gameOver(player))
