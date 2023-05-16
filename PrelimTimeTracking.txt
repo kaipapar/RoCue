@@ -14,3 +14,5 @@
 15.5.23 floorStruct fine tuning - Kaipapar
     15:00-15:40 -- Tweaking parameters and figuring out 
                     interaction with stairs and trying not to spawn into walls..
+16.5.23 floorStruct player position change - Kaipapar
+    15-16:15 -- Trying to get the player to spawn in to the correct location upon floorchange. Problems are mainly solved, next up is implementation.

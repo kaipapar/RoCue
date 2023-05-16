@@ -53,6 +53,8 @@ void inputHandling(int input, struct Entity* player,
         case 'i':
             // interact
             interact(player, floorArray);
+            //int localFloor = currentFloor;
+            newPos = floorArray[4].posStart;        ////////////////////    This is where you continue
             break;
         
         default:
@@ -64,14 +66,14 @@ void inputHandling(int input, struct Entity* player,
 
 /*  Checks whether movement over a certain block is allowed */
 void playerMovement(struct Position newPos, 
-                    struct Entity* player, struct Floor* floorArray, int currentFloor)
+                    struct Entity* player, struct Floor* floorArray, int localCurrentFloor)
 {
-    if (floorArray[currentFloor].map[newPos.y][newPos.x].walkable)
+    if (floorArray[localCurrentFloor].map[newPos.y][newPos.x].walkable)
     {
-        clearFOV(player, floorArray, currentFloor);
+        clearFOV(player, floorArray, localCurrentFloor);
         player->pos.y = newPos.y;
         player->pos.x = newPos.x;
-        createFOV(player, floorArray, currentFloor);
+        createFOV(player, floorArray, localCurrentFloor);
     }
 }
 
@@ -108,7 +110,11 @@ void interact(struct Entity* player, struct Floor* floorArray)
             && player->pos.x == floorArray[currentFloor].stairs->pos.x)
     {
         changeFloor(1);
-        playerMovement(floorArray[currentFloor].posStart, player, floorArray, currentFloor);
+        //int localFloor = currentFloor; ///< Need to localize current floor. If not localized, incrementing on it would change the floor altogether.
+        //struct Position newPos = {floorArray[localFloor++].posStart->y,floorArray[localFloor++].posStart->x};
+        //playerMovement(newPos, player, floorArray, currentFloor);
+        //player->pos.y = 0;
+        //player->pos.x = 0;
 
         //currentFloor++;
     }

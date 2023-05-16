@@ -45,7 +45,11 @@ priority flags: 1 = low priority,
 
 15.5.23
 - [-] Make posStart = location of stairs.
-    - [] I've now made posStart a member of floorStruct but it doesn't update the players position for some reason. 
+    - [x] I've now made posStart a member of floorStruct but it doesn't update the players position for some reason. 
+            - [] the reason was something to do with casting the global current floor to local current floor etc... WEIRD stuff mang.
+
+16.5.23
+- [-] Continue tweaking changing the players pos when floor is changed.
 
 ### Completed [x]
 12.5.23

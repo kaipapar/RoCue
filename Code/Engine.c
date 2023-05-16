@@ -62,6 +62,7 @@ void gameLoop()
         if (gameOver(player))
         {
             break;
+            quitGame(player, floorArray);
         }
     }
 }
