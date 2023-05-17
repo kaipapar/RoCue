@@ -39,8 +39,8 @@ void gameLoop()
     struct Floor* floorArray = floorArrayCreation();
 
     //struct Position posStart = getStartPos(floorArray[*currentFloorPTR].rooms); // Is this ok? or is a local .rooms made? Does it matter? Does anything matter?  
-    int currentFloor = 0;      // Now currentfloor is just an integer
-    int* currentFloorPTR = &currentFloor;
+    int currentFloor = 0;      // Now currentfloor is local, not global
+    int* currentFloorPTR = &currentFloor;   ///< remember the mem loc of current floor
     struct Entity* player = playerCreation(floorArray[*currentFloorPTR].posStart);
 
     createFOV(player, floorArray, currentFloorPTR);
@@ -88,7 +88,6 @@ bool gameOver(struct Entity* player)
 void quitGame(struct Entity* player, struct Floor* floorArray)
 {
     //It is questionable whether free() works now but this is a shot at it
-    // free queue also when it is implemented
     free(player);
     for (int i = 0; i<MAP_DEPTH; i++)
     {
@@ -96,6 +95,7 @@ void quitGame(struct Entity* player, struct Floor* floorArray)
         free(floorArray[i].stairs);
         free(floorArray[i].coinArray);
         free(floorArray[i].map);
+        // ::::free queue also when it is implemented::::
     }
     free(floorArray);
     endwin();

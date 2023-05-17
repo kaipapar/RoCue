@@ -73,10 +73,10 @@ void allDraw(struct Entity* player, struct Floor* floorArray, int* currentFloorP
     entityDrawing(floorArray[*currentFloorPTR].stairs);
     infoBoxDraw(player, currentFloorPTR); // UI element rendering for controls info
 }
-
+/**  Subwindow for printing game information */
 void infoBoxDraw(struct Entity* player, int* currentFloorPTR)
 {
-        /*  Subwindow for printing game information */
+
     WINDOW* subwindow = newwin(13,30,5,100);
     refresh();
     box(subwindow,0,0);
@@ -87,7 +87,8 @@ void infoBoxDraw(struct Entity* player, int* currentFloorPTR)
                             "Quit - F2 \n"
                             "Interact - I \n"
                             "Inventory - E";
-    mvwprintw(subwindow, 1, 1, "Welcome to RoCue\n %s \n Y: %d, X: %d \n Floor: %d \n Points: %d", hintBoxContent,player->pos.y, player->pos.x, *currentFloorPTR, player -> points);
+    mvwprintw(subwindow, 1, 1, "Welcome to RoCue\n %s \n Y: %d, X: %d \n Floor: %d \n Points: %d", 
+                hintBoxContent,player->pos.y, player->pos.x, *currentFloorPTR, player -> points);
     //mvwprintw(subwindow,1,1,"Player y position: %d, x position: %d",);
     refresh();
     wrefresh(subwindow);

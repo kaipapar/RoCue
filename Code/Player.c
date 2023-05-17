@@ -8,7 +8,6 @@
 */
 #include "Rogue.h"
 
-//struct Position posStart; // ???
 /**
  * CREATE CUSTOM STRUCT FOR PLAYER WHICH 'INHERITS' ENTITY STRUCT
  */
@@ -27,7 +26,7 @@ struct Entity* playerCreation(struct Position posStart)
     return newPlayer;
 }
 
-/*  Handle user input */
+/**  Handle user input */
 void inputHandling(int input, struct Entity* player, 
                     struct Floor* floorArray, int* currentFloorPTR)
 {
@@ -51,12 +50,8 @@ void inputHandling(int input, struct Entity* player,
             quitGame(player, floorArray);
             break;
         case 'i':
-            // interact
             interact(player, floorArray, currentFloorPTR);
-            //int localFloor = currentFloor;
-            //newPos = floorArray[4].posStart;        ////////////////////    This is where you continue
             break;
-        
         default:
             break;
     }
@@ -64,7 +59,7 @@ void inputHandling(int input, struct Entity* player,
     playerMovement(newPos, player, floorArray, currentFloorPTR);
 }
 
-/*  Checks whether movement over a certain block is allowed */
+/**  Checks whether movement over a certain block is allowed */
 void playerMovement(struct Position newPos, 
                     struct Entity* player, struct Floor* floorArray, int* currentFloorPTR)
 {
@@ -80,6 +75,8 @@ void playerMovement(struct Position newPos,
 void interact(struct Entity* player, struct Floor* floorArray, int* currentFloorPTR)
 {
     int dice = 0;
+
+    /// Interacting with coins
     for (int i = 0; i < COIN_COUNT+1; i++)
     {
         if (player->pos.y == (floorArray[*currentFloorPTR].coinArray + i)->pos.y 
@@ -89,36 +86,31 @@ void interact(struct Entity* player, struct Floor* floorArray, int* currentFloor
             (floorArray[*currentFloorPTR].coinArray + i)-> visible = false;
             (floorArray[*currentFloorPTR].coinArray + i)-> collected = true;
         }
-        else if (player->pos.y == floorArray[*currentFloorPTR].orc->pos.y 
-                && player->pos.x == floorArray[*currentFloorPTR].orc->pos.x 
-                && floorArray[*currentFloorPTR].orc->collected == false)
-        {
-            dice = rand() % 20;
-            if (dice < 10)
-            {
-                player->points -= 100;
-            }
-            else
-            {
-                floorArray[*currentFloorPTR].orc->points -= 300;
-            }
-            floorArray[*currentFloorPTR].orc->collected = true;
-        }
     }
-    //____________________________________
+
+    /// Interacting with the enemy
+    if (player->pos.y == floorArray[*currentFloorPTR].orc->pos.y 
+            && player->pos.x == floorArray[*currentFloorPTR].orc->pos.x 
+            && floorArray[*currentFloorPTR].orc->collected == false)
+    {
+        dice = rand() % 20;
+        if (dice < 10)
+        {
+            player->points -= 100;
+        }
+        else
+        {
+            floorArray[*currentFloorPTR].orc->points -= 300;
+        }
+        floorArray[*currentFloorPTR].orc->collected = true;
+    }
+
+    ///  Interacting with stairs
     if (player->pos.y == floorArray[*currentFloorPTR].stairs->pos.y 
             && player->pos.x == floorArray[*currentFloorPTR].stairs->pos.x)
     {
         changeFloor(1, currentFloorPTR);
-        //int localFloor = currentFloor; ///< Need to localize current floor. If not localized, incrementing on it would change the floor altogether.
-        //struct Position newPos = {floorArray[localFloor++].posStart->y,floorArray[localFloor++].posStart->x};
-        //int newFloor = *currentFloorPTR + 1;
-        //*currentFloorPTR = newFloor;    // <- this works.   this doesnt -> currentFloorPTR = &newFloor;
         playerMovement(floorArray[*currentFloorPTR].stairs->pos, player, floorArray, currentFloorPTR);
-        //player->pos.y = 0;
-        //player->pos.x = 0;
-
-        //currentFloor++;
     }
 }
 
@@ -128,10 +120,9 @@ void interact(struct Entity* player, struct Floor* floorArray, int* currentFloor
 */
 void changeFloor(int floorChange, int* currentFloorPTR)
 {
-    int newFloor = *currentFloorPTR + floorChange;
+    int newFloor = *currentFloorPTR + floorChange;  // <- this works.   this doesnt -> currentFloorPTR = &newFloor;
     if (newFloor < MAP_DEPTH && 0 < newFloor)
     {
         *currentFloorPTR = newFloor;    ///< Swaps the data in mem location of currentFloor to whatever newFloor is.
-
     }
 }
