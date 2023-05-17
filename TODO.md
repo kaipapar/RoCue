@@ -40,20 +40,7 @@ priority flags: 1 = low priority,
 
 12.5.23
 - [] Consider updating floor struct to be more efficient.  See localizing.txt for details.
-- [] Localize currentFloor
-- [x] fix bug in floorStruct-branch where the floors don't change.
-
-15.5.23
-- [-] Make posStart = location of stairs.
-    - [x] I've now made posStart a member of floorStruct but it doesn't update the players position for some reason. 
-            - [] the reason was something to do with casting the global current floor to local current floor etc... WEIRD stuff mang.
-
-16.5.23
-- [-] Continue tweaking changing the players pos when floor is changed.
-
-17.5.23
-- [-] Localize currentfloor. Make a pointer to the original currentfloor integer and edit through that.
-- [] Try to swap the pointers from floor struct members and once created only access them directly using floor.map[y][x] syntax, not floor->map...
+    - [] Try to swap the pointers from floor struct members and once created only access them directly using floor.map[y][x] syntax, not floor->map...
 
 ### Completed [x]
 12.5.23
@@ -62,3 +49,10 @@ priority flags: 1 = low priority,
 - [x] 3 Plan: write plan for code architecture without any global variables. #docs #code
     - [x] Main.c global variables and Rogue.h externs should be localized.
 - [x] 3 Reminder: remove all global variables. #code
+
+17.5.23
+- [x] Localize currentfloor. Make a pointer to the original currentfloor integer and edit through that. 17.5.23
+- [x] Make posStart = location of stairs.   15.5.23
+    - [x] I've now made posStart a member of floorStruct but it doesn't update the players position for some reason. 
+            - [] the reason was something to do with casting the global current floor to local current floor etc... WEIRD stuff mang.
+- [x] Localize currentFloor 12.5.23
