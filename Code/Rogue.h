@@ -117,8 +117,8 @@ struct Floor
 void mapDrawing(struct Tile** map);
 void entityDrawing(struct Entity* entity);
 void entitiesDrawing(struct Entity* entityArray, int entityCount);
-void allDraw(struct Entity* player, struct Floor* floorArray, int currentFloor);
-void infoBoxDraw(struct Entity* player);
+void allDraw(struct Entity* player, struct Floor* floorArray, int* currentFloorPTR);
+void infoBoxDraw(struct Entity* player, int* currentFloorPTR);
 
 // Engine.c
 void setupCurses();
@@ -135,10 +135,10 @@ struct Entity* stairsCreation(struct Tile** map);
 
 // Player.c
 struct Entity* playerCreation(struct Position posStart);
-void inputHandling(int input, struct Entity* player, struct Floor* floorArray, int currentFloor);
-void playerMovement(struct Position newPos, struct Entity* player, struct Floor* floorArray, int currentFloor);
-void interact(struct Entity* player, struct Floor* floorArray);
-void changeFloor(int floorChange);
+void inputHandling(int input, struct Entity* player, struct Floor* floorArray, int* currentFloorPTR);
+void playerMovement(struct Position newPos, struct Entity* player, struct Floor* floorArray, int* currentFloorPTR);
+void interact(struct Entity* player, struct Floor* floorArray, int* currentFloorPTR);
+void changeFloor(int floorChange, int* currentFloorPTR);
 
 // Room.c
 struct Room roomCreation(int y, int x, int height, int width);
@@ -146,8 +146,8 @@ void addRoomToMap(struct Room room, struct Tile** map);
 void roomConnections(struct Position centerSelf, struct Position centerOther, struct Tile** map);
 
 // Fov.c
-void createFOV(struct Entity* player, struct Floor* floorArray, int currentFloor);
-void clearFOV(struct Entity* player, struct Floor* floorArray, int currentFloor);
+void createFOV(struct Entity* player, struct Floor* floorArray, int* currentFloorPTR);
+void clearFOV(struct Entity* player, struct Floor* floorArray, int* currentFloorPTR);
 int getDistance(struct Position origin, struct Position target);
 bool isInMap(int y, int x);
 bool lineOfSight(struct Position origin, struct Position target, struct Tile** map);
@@ -175,7 +175,7 @@ struct Floor* floorArrayCreation();
 //MenuUnix.c
 void menuDraw();
 
-extern int currentFloor;
+//extern int currentFloor;
 
 //extern struct Position posStart;
 

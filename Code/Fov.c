@@ -8,7 +8,7 @@
 */
 #include "Rogue.h"
 
-void createFOV(struct Entity* player, struct Floor* floorArray, int currentFloor)
+void createFOV(struct Entity* player, struct Floor* floorArray, int* currentFloorPTR)
 {
     int y = 0;
     int x = 0;
@@ -16,8 +16,8 @@ void createFOV(struct Entity* player, struct Floor* floorArray, int currentFloor
     int radius = 15; // draw distance of the player
     struct Position target;
 
-    floorArray[currentFloor].map[player->pos.y][player->pos.x].visible = true;
-    floorArray[currentFloor].map[player->pos.y][player->pos.x].seen = true;
+    floorArray[*currentFloorPTR].map[player->pos.y][player->pos.x].visible = true;
+    floorArray[*currentFloorPTR].map[player->pos.y][player->pos.x].seen = true;
 
     for (y = player->pos.y - radius; y < player->pos.y + radius; y++)
     {
@@ -28,39 +28,39 @@ void createFOV(struct Entity* player, struct Floor* floorArray, int currentFloor
             distance = getDistance(player->pos, target);
             //printf("Target y: %d, target x: %d, player y, player x, distance");
 
-            if (distance < radius && isInMap(y, x) && lineOfSight(player->pos, target, floorArray[currentFloor].map))
+            if (distance < radius && isInMap(y, x) && lineOfSight(player->pos, target, floorArray[*currentFloorPTR].map))
             {
-                floorArray[currentFloor].map[y][x].visible = true;
-                floorArray[currentFloor].map[y][x].seen = true;
+                floorArray[*currentFloorPTR].map[y][x].visible = true;
+                floorArray[*currentFloorPTR].map[y][x].seen = true;
                 for (int i = 0; i < COIN_COUNT; i++)
                 {
-                    if ((floorArray[currentFloor].coinArray + i)->pos.y == y 
-                        && (floorArray[currentFloor].coinArray + i)->pos.x == x 
-                        && (floorArray[currentFloor].coinArray + i)->collected == false) 
+                    if ((floorArray[*currentFloorPTR].coinArray + i)->pos.y == y 
+                        && (floorArray[*currentFloorPTR].coinArray + i)->pos.x == x 
+                        && (floorArray[*currentFloorPTR].coinArray + i)->collected == false) 
                     {   //if there is a coin at these x,y coordinates
-                        (floorArray[currentFloor].coinArray + i)->visible = true;
+                        (floorArray[*currentFloorPTR].coinArray + i)->visible = true;
                     }
                 }
 
-                if (floorArray[currentFloor].orc -> pos.y == y 
-                    && floorArray[currentFloor].orc -> pos.x == x 
-                    && floorArray[currentFloor].orc->collected == false)
+                if (floorArray[*currentFloorPTR].orc -> pos.y == y 
+                    && floorArray[*currentFloorPTR].orc -> pos.x == x 
+                    && floorArray[*currentFloorPTR].orc->collected == false)
                 {
-                    floorArray[currentFloor].orc -> visible = true;
+                    floorArray[*currentFloorPTR].orc -> visible = true;
                 }
 
-                if (floorArray[currentFloor].stairs -> pos.y == y 
-                    && floorArray[currentFloor].stairs -> pos.x == x 
-                    && floorArray[currentFloor].stairs->collected == false)
+                if (floorArray[*currentFloorPTR].stairs -> pos.y == y 
+                    && floorArray[*currentFloorPTR].stairs -> pos.x == x 
+                    && floorArray[*currentFloorPTR].stairs->collected == false)
                 {
-                    floorArray[currentFloor].stairs -> visible = true;
+                    floorArray[*currentFloorPTR].stairs -> visible = true;
                 }
             }/*  Yes I know there is 3 nested for loops  */
         }
     }
 }
 
-void clearFOV(struct Entity* player, struct Floor* floorArray, int currentFloor)
+void clearFOV(struct Entity* player, struct Floor* floorArray, int* currentFloorPTR)
 {
     int y = 0;
     int x = 0;
@@ -72,7 +72,7 @@ void clearFOV(struct Entity* player, struct Floor* floorArray, int currentFloor)
         {
             if (isInMap(y,x))
             {
-                floorArray[currentFloor].map[y][x].visible = false;
+                floorArray[*currentFloorPTR].map[y][x].visible = false;
 
                 /*  clear fov of coins  */
                 for (int i = 0; i < COIN_COUNT; i++)
@@ -81,23 +81,23 @@ void clearFOV(struct Entity* player, struct Floor* floorArray, int currentFloor)
                     {   //if there is a coin at these x,y coordinates
                         (coinArray + i)->visible = false;
                     }*/
-                    if ((floorArray[currentFloor].coinArray + i)->pos.y == y 
-                        && (floorArray[currentFloor].coinArray + i)->pos.x == x)
+                    if ((floorArray[*currentFloorPTR].coinArray + i)->pos.y == y 
+                        && (floorArray[*currentFloorPTR].coinArray + i)->pos.x == x)
                     {
-                        (floorArray[currentFloor].coinArray + i)->visible = false;
+                        (floorArray[*currentFloorPTR].coinArray + i)->visible = false;
                     }
                 }   
 
                 /*  Clear fov of orc */
-                if (floorArray[currentFloor].orc -> pos.y == y 
-                    && floorArray[currentFloor].orc -> pos.x == x)
+                if (floorArray[*currentFloorPTR].orc -> pos.y == y 
+                    && floorArray[*currentFloorPTR].orc -> pos.x == x)
                 {
-                    floorArray[currentFloor].orc -> visible = false;
+                    floorArray[*currentFloorPTR].orc -> visible = false;
                 }
-                if (floorArray[currentFloor].stairs -> pos.y == y 
-                    && floorArray[currentFloor].stairs -> pos.x == x)
+                if (floorArray[*currentFloorPTR].stairs -> pos.y == y 
+                    && floorArray[*currentFloorPTR].stairs -> pos.x == x)
                 {
-                    floorArray[currentFloor].stairs -> visible = false;
+                    floorArray[*currentFloorPTR].stairs -> visible = false;
                 }
             }
         }

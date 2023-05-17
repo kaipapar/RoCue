@@ -16,3 +16,6 @@
                     interaction with stairs and trying not to spawn into walls..
 16.5.23 floorStruct player position change - Kaipapar
     15-16:15 -- Trying to get the player to spawn in to the correct location upon floorchange. Problems are mainly solved, next up is implementation.
+17.5.23 - Kaipapar
+    11:30 - 12
+    14:30 -

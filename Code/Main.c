@@ -5,8 +5,6 @@
 */
 #include "Rogue.h"
 
-int currentFloor = 0;
-
 /**
  * Sets up the run essential variables.
  * 

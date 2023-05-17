@@ -41,7 +41,7 @@ priority flags: 1 = low priority,
 12.5.23
 - [] Consider updating floor struct to be more efficient.  See localizing.txt for details.
 - [] Localize currentFloor
-- [] fix bug in floorStruct-branch where the floors don't change.
+- [x] fix bug in floorStruct-branch where the floors don't change.
 
 15.5.23
 - [-] Make posStart = location of stairs.
@@ -50,6 +50,10 @@ priority flags: 1 = low priority,
 
 16.5.23
 - [-] Continue tweaking changing the players pos when floor is changed.
+
+17.5.23
+- [-] Localize currentfloor. Make a pointer to the original currentfloor integer and edit through that.
+- [] Try to swap the pointers from floor struct members and once created only access them directly using floor.map[y][x] syntax, not floor->map...
 
 ### Completed [x]
 12.5.23

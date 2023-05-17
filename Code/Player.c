@@ -29,7 +29,7 @@ struct Entity* playerCreation(struct Position posStart)
 
 /*  Handle user input */
 void inputHandling(int input, struct Entity* player, 
-                    struct Floor* floorArray, int currentFloor)
+                    struct Floor* floorArray, int* currentFloorPTR)
 {
     struct Position newPos = { player->pos.y, player->pos.x };
 
@@ -52,46 +52,46 @@ void inputHandling(int input, struct Entity* player,
             break;
         case 'i':
             // interact
-            interact(player, floorArray);
+            interact(player, floorArray, currentFloorPTR);
             //int localFloor = currentFloor;
-            newPos = floorArray[4].posStart;        ////////////////////    This is where you continue
+            //newPos = floorArray[4].posStart;        ////////////////////    This is where you continue
             break;
         
         default:
             break;
     }
 
-    playerMovement(newPos, player, floorArray, currentFloor);
+    playerMovement(newPos, player, floorArray, currentFloorPTR);
 }
 
 /*  Checks whether movement over a certain block is allowed */
 void playerMovement(struct Position newPos, 
-                    struct Entity* player, struct Floor* floorArray, int localCurrentFloor)
+                    struct Entity* player, struct Floor* floorArray, int* currentFloorPTR)
 {
-    if (floorArray[localCurrentFloor].map[newPos.y][newPos.x].walkable)
+    if (floorArray[*currentFloorPTR].map[newPos.y][newPos.x].walkable)
     {
-        clearFOV(player, floorArray, localCurrentFloor);
+        clearFOV(player, floorArray, currentFloorPTR);
         player->pos.y = newPos.y;
         player->pos.x = newPos.x;
-        createFOV(player, floorArray, localCurrentFloor);
+        createFOV(player, floorArray, currentFloorPTR);
     }
 }
 
-void interact(struct Entity* player, struct Floor* floorArray)
+void interact(struct Entity* player, struct Floor* floorArray, int* currentFloorPTR)
 {
     int dice = 0;
     for (int i = 0; i < COIN_COUNT+1; i++)
     {
-        if (player->pos.y == (floorArray[currentFloor].coinArray + i)->pos.y 
-            && player->pos.x == (floorArray[currentFloor].coinArray + i)->pos.x)
+        if (player->pos.y == (floorArray[*currentFloorPTR].coinArray + i)->pos.y 
+            && player->pos.x == (floorArray[*currentFloorPTR].coinArray + i)->pos.x)
         {
-            player->points += (floorArray[currentFloor].coinArray + i)->value;
-            (floorArray[currentFloor].coinArray + i)-> visible = false;
-            (floorArray[currentFloor].coinArray + i)-> collected = true;
+            player->points += (floorArray[*currentFloorPTR].coinArray + i)->value;
+            (floorArray[*currentFloorPTR].coinArray + i)-> visible = false;
+            (floorArray[*currentFloorPTR].coinArray + i)-> collected = true;
         }
-        else if (player->pos.y == floorArray[currentFloor].orc->pos.y 
-                && player->pos.x == floorArray[currentFloor].orc->pos.x 
-                && floorArray[currentFloor].orc->collected == false)
+        else if (player->pos.y == floorArray[*currentFloorPTR].orc->pos.y 
+                && player->pos.x == floorArray[*currentFloorPTR].orc->pos.x 
+                && floorArray[*currentFloorPTR].orc->collected == false)
         {
             dice = rand() % 20;
             if (dice < 10)
@@ -100,19 +100,21 @@ void interact(struct Entity* player, struct Floor* floorArray)
             }
             else
             {
-                floorArray[currentFloor].orc->points -= 300;
+                floorArray[*currentFloorPTR].orc->points -= 300;
             }
-            floorArray[currentFloor].orc->collected = true;
+            floorArray[*currentFloorPTR].orc->collected = true;
         }
     }
     //____________________________________
-    if (player->pos.y == floorArray[currentFloor].stairs->pos.y 
-            && player->pos.x == floorArray[currentFloor].stairs->pos.x)
+    if (player->pos.y == floorArray[*currentFloorPTR].stairs->pos.y 
+            && player->pos.x == floorArray[*currentFloorPTR].stairs->pos.x)
     {
-        changeFloor(1);
+        changeFloor(1, currentFloorPTR);
         //int localFloor = currentFloor; ///< Need to localize current floor. If not localized, incrementing on it would change the floor altogether.
         //struct Position newPos = {floorArray[localFloor++].posStart->y,floorArray[localFloor++].posStart->x};
-        //playerMovement(newPos, player, floorArray, currentFloor);
+        //int newFloor = *currentFloorPTR + 1;
+        //*currentFloorPTR = newFloor;    // <- this works.   this doesnt -> currentFloorPTR = &newFloor;
+        playerMovement(floorArray[*currentFloorPTR].stairs->pos, player, floorArray, currentFloorPTR);
         //player->pos.y = 0;
         //player->pos.x = 0;
 
@@ -124,12 +126,12 @@ void interact(struct Entity* player, struct Floor* floorArray)
  * @brief Function which changes floors either up or down
  * @param[in] floorChange : negative or positive integer which states how many floors we want to go up or down.
 */
-void changeFloor(int floorChange)
+void changeFloor(int floorChange, int* currentFloorPTR)
 {
-    int newFloor = currentFloor + floorChange;
+    int newFloor = *currentFloorPTR + floorChange;
     if (newFloor < MAP_DEPTH && 0 < newFloor)
     {
-        currentFloor = newFloor;
+        *currentFloorPTR = newFloor;    ///< Swaps the data in mem location of currentFloor to whatever newFloor is.
 
     }
 }
