@@ -118,7 +118,7 @@ void mapDrawing(struct Tile** map);
 void entityDrawing(struct Entity* entity);
 void entitiesDrawing(struct Entity* entityArray, int entityCount);
 void allDraw(struct Entity* player, struct Floor* floorArray, int* currentFloorPTR);
-void infoBoxDraw(struct Entity* player, int* currentFloorPTR);
+void infoBoxDraw(struct Entity* player, int* currentFloorPTR, struct Floor* floorArray);
 
 // Engine.c
 void setupCurses();

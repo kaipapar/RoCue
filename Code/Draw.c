@@ -71,10 +71,10 @@ void allDraw(struct Entity* player, struct Floor* floorArray, int* currentFloorP
     entitiesDrawing(floorArray[*currentFloorPTR].coinArray, COIN_COUNT); // temporary testing function (replace later)
     entityDrawing(floorArray[*currentFloorPTR].orc); // orc is similar to player
     entityDrawing(floorArray[*currentFloorPTR].stairs);
-    infoBoxDraw(player, currentFloorPTR); // UI element rendering for controls info
+    infoBoxDraw(player, currentFloorPTR, floorArray); // UI element rendering for controls info
 }
 /**  Subwindow for printing game information */
-void infoBoxDraw(struct Entity* player, int* currentFloorPTR)
+void infoBoxDraw(struct Entity* player, int* currentFloorPTR, struct Floor* floorArray)
 {
 
     WINDOW* subwindow = newwin(13,30,5,100);
@@ -87,8 +87,8 @@ void infoBoxDraw(struct Entity* player, int* currentFloorPTR)
                             "Quit - F2 \n"
                             "Interact - I \n"
                             "Inventory - E";
-    mvwprintw(subwindow, 1, 1, "Welcome to RoCue\n %s \n Y: %d, X: %d \n Floor: %d \n Points: %d", 
-                hintBoxContent,player->pos.y, player->pos.x, *currentFloorPTR, player -> points);
+    mvwprintw(subwindow, 1, 1, "Welcome to RoCue\n %s \n Y: %d, X: %d \n Floor: %d \n Points: %d \n PosStart: Y: %d X: %d", 
+                            hintBoxContent,player->pos.y, player->pos.x, *currentFloorPTR, player -> points, floorArray[*currentFloorPTR].stairs->pos.y, floorArray[*currentFloorPTR].stairs->pos.x);
     //mvwprintw(subwindow,1,1,"Player y position: %d, x position: %d",);
     refresh();
     wrefresh(subwindow);
