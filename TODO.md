@@ -23,7 +23,6 @@ priority flags: 1 = low priority,
 - [-] 1 Github: make repo _nice_ #docs
 - [~] 2 Doxygen: Create documentation with doxygen or similar tool #docs
 - [~] 2 Pathfinding: Make the orcs BSF pathfinding work @Kaipapar
-- [+] 2 Stairs: Stairs currently only work in one direction, need to work both ways.
 - [] 2 Inventory: Create architecture for inventory system
 - [] 1 Items: Create new items after inventory system
 - [] 1 World interaction: Pitfalls etc
@@ -61,3 +60,6 @@ priority flags: 1 = low priority,
     - [x] I've now made posStart a member of floorStruct but it doesn't update the players position for some reason. 
             - [] the reason was something to do with casting the global current floor to local current floor etc... WEIRD stuff mang.
 - [x] Localize currentFloor 12.5.23
+
+23.5.23
+- [x] 2 Stairs: Stairs currently only work in one direction, need to work both ways.

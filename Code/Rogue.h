@@ -123,6 +123,7 @@ void infoBoxDraw(struct Entity* player, int* currentFloorPTR, struct Floor* floo
 // Engine.c
 void setupCurses();
 void gameLoop(); ///< Initializes all variables
+void upkeep(struct Entity* player, struct Floor* floorArray, int* currentFloorPTR);
 bool gameOver(struct Entity* player);
 void quitGame(struct Entity* player, struct Floor* floorArray); ///< Doesn't take currentFloor as argument because all floors are freed
 void EC(void *pointer); 

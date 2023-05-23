@@ -21,4 +21,4 @@
     14:30 - 16 -- Floorstruct now works as intended!
     16-17 -- Last hour went with git shizzle.
 23.5.23 general project upkeeping - Kaipapar, Neettan
-    12 - x --
+    12 - 16:26 -- Stairs bug solved, upkeep added

@@ -43,11 +43,13 @@ void gameLoop()
     int* currentFloorPTR = &currentFloor;   ///< remember the mem loc of current floor
     struct Entity* player = playerCreation(floorArray[*currentFloorPTR].posStart);
 
-    createFOV(player, floorArray, currentFloorPTR);
-    allDraw(player, floorArray, currentFloorPTR);
+    //createFOV(player, floorArray, currentFloorPTR);
+    //allDraw(player, floorArray, currentFloorPTR);
     
     while(true)
-    {       
+    {
+        upkeep(player, floorArray, currentFloorPTR);
+        allDraw(player, floorArray, currentFloorPTR);
         ch = getch();   
         if(ch == KEY_F(2))
         {
@@ -57,13 +59,13 @@ void gameLoop()
         inputHandling(ch, 
                         player, 
                         floorArray, currentFloorPTR);
-        allDraw(player, floorArray, currentFloorPTR);
         
         if (gameOver(player))
         {
             break;
             quitGame(player, floorArray);
         }
+        //CPUTurn()
     }
 }
 /**
@@ -111,4 +113,10 @@ void EC(void *pointer)
 		fprintf(stderr, "Error, contiguous memory allocation failed");
 		exit(-1);
 	}
+}
+
+void upkeep(struct Entity* player, struct Floor* floorArray, int* currentFloorPTR)
+{
+    clearFOV(player, floorArray, currentFloorPTR);
+    createFOV(player, floorArray, currentFloorPTR);
 }
