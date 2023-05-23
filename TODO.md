@@ -28,11 +28,11 @@ priority flags: 1 = low priority,
 - [] 1 Items: Create new items after inventory system
 - [] 1 World interaction: Pitfalls etc
 - [] 1 File I/O: Save points--gamestates..
-- [-] 2 Error Checking: Memory buffers, check that malloc works.
+- [+] 2 Error Checking: Memory buffers, check that malloc works.
 - [] 1 Seed: Make seeding optional
 
 8.5.23  
-- [] 2 Commenting: Recreate docstrings and comments to work with Doxygen #docs
+- [-] 2 Commenting: Recreate docstrings and comments to work with Doxygen #docs
 - [] 1 Windows port: recreate menu using ncurses or find a way for menu.h to work with Win
 
 10.5.23
@@ -41,6 +41,11 @@ priority flags: 1 = low priority,
 12.5.23
 - [] Consider updating floor struct to be more efficient.  See localizing.txt for details.
     - [] Try to swap the pointers from floor struct members and once created only access them directly using floor.map[y][x] syntax, not floor->map...
+
+23.5.23
+- [] 3 Upkeep function: Check surroundings of player and do something 
+    - [] --> Update game world / player status / logic tick
+- [] Restart button alongside Quit game button --> returns to main menu and regenerates maps
 
 ### Completed [x]
 12.5.23

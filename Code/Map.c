@@ -17,15 +17,17 @@ struct Tile** mapTileCreation()
 {
     struct Tile** tiles = calloc(MAP_HEIGHT, sizeof(struct Tile**));
     EC((struct Tile**) tiles);
+    
+    // v Unsure if necessary
+    //tiles = calloc(MAP_WIDTH, sizeof(struct Tile*));
+    //EC((struct Tile*) tiles);
 
-    tiles = calloc(MAP_WIDTH, sizeof(struct Tile*));
-    EC((struct Tile*) tiles);
     for (int y = 0; y < MAP_HEIGHT; y++)
     {
         // how does this work. tiles = map_width x pointers to tiles.
         // tiles[y] --> one tile from those tiles?? Why calloc?
         // isn't this like saying int x = calloc(1, sizeof(int))
-        tiles[y] = calloc(MAP_WIDTH, sizeof(struct Tile)); 
+        tiles[y] = calloc(MAP_WIDTH, sizeof(struct Tile));  
         //EC((struct Tile) tiles[y]);
 
         for (int x = 0; x < MAP_WIDTH; x++)

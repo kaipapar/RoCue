@@ -59,7 +59,6 @@ void gameLoop()
                         floorArray, currentFloorPTR);
         allDraw(player, floorArray, currentFloorPTR);
         
-        
         if (gameOver(player))
         {
             break;
