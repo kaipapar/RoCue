@@ -47,33 +47,33 @@ void enemyPathFinding(struct Entity* orc, struct Entity* player, struct Tile** m
 {     //http://www.roguebasin.com/index.php/Quick_Pathfinding_in_a_Dungeon  
       //Find path between enemy and player, activated when orc sees player
     //  Using BFS
+
     // orc position
-    int originX = orc -> pos.x;
-    int originY = orc -> pos.y;
+    struct Position origin = orc->pos;
     // player position
-    int targetX = player -> pos.x;
-    int targetY = player -> pos.y;
+    struct Position target = player->pos;
 
     //int weight = 0; //To be used in a future update
 
-    int currentX = 0;
-    int currentY = 0;
+    struct Position current = {0,0};
 
     // need for 'selected' variable ? 
 
     // mark adjacent positions with weight + 1
     // adjacent --> current; --y, --x, ++x, ++y
     struct Queue* queue = queueCreation();
-    enqueue(queue, map[originY][originX]);
+    
+    enqueue(queue, map[origin.y][origin.x]);
     visit(queue);
 
-    while (isEmpty(queue) == 0)
+    while (!isEmpty(queue)) ///< While queue is not empty visit neighbours of current 
     {
+        //  current = deque
+
+        // visit neighbours
         if (currentX-- == 0 && map[currentY][currentX--].walkable == true)
         {   // operate on (x-1,y)
             map[currentY][currentX-1].found = map[currentY][currentX].found++;
-            
-
         }
         else if (currentX++ == 0 && map[currentY][currentX++].walkable == true)
         {   //operate on (x+1,y)
@@ -88,11 +88,6 @@ void enemyPathFinding(struct Entity* orc, struct Entity* player, struct Tile** m
             map[currentY-1][currentX].found = map[currentY][currentX].found++;
         
         }
-        else    
-        {
-            
-        }
-
 
         // once player has been found 
         if (currentX == targetX && currentY == targetY)

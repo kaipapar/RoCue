@@ -12,7 +12,7 @@
 
 struct Queue* queueCreation()
 {
-    struct Queue* queue = calloc(STACKLIMIT, sizeof(struct Queue));
+    struct Queue* queue = calloc(STACKLIMIT, sizeof(struct Position));
     queue->end = -1;
     queue->front = 0;
 
