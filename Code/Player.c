@@ -36,15 +36,19 @@ void inputHandling(int input, struct Entity* player,
     {
         case 'w':
             newPos.y--;
+            playerMovement(newPos, player, floorArray, currentFloorPTR);
             break;
         case 's':
             newPos.y++;
+            playerMovement(newPos, player, floorArray, currentFloorPTR);
             break;
         case 'a':
             newPos.x--;
+            playerMovement(newPos, player, floorArray, currentFloorPTR);
             break;
         case 'd':
             newPos.x++;
+            playerMovement(newPos, player, floorArray, currentFloorPTR);
             break;
         case KEY_F(2):
             quitGame(player, floorArray);
@@ -56,7 +60,7 @@ void inputHandling(int input, struct Entity* player,
             break;
     }
 
-    playerMovement(newPos, player, floorArray, currentFloorPTR);
+    endTurn(player, floorArray, currentFloorPTR);
 }
 
 /**  Checks whether movement over a certain block is allowed */
@@ -70,6 +74,12 @@ void playerMovement(struct Position newPos,
         player->pos.x = newPos.x;
         createFOV(player, floorArray, currentFloorPTR);
     }
+}
+
+void endTurn(struct Entity* player, struct Floor* floorArray, int* currentFloorPTR)
+{
+        clearFOV(player, floorArray, currentFloorPTR);
+        createFOV(player, floorArray, currentFloorPTR);
 }
 
 void interact(struct Entity* player, struct Floor* floorArray, int* currentFloorPTR)

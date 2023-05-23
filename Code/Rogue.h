@@ -137,6 +137,7 @@ struct Entity* stairsCreation(struct Tile** map);
 struct Entity* playerCreation(struct Position posStart);
 void inputHandling(int input, struct Entity* player, struct Floor* floorArray, int* currentFloorPTR);
 void playerMovement(struct Position newPos, struct Entity* player, struct Floor* floorArray, int* currentFloorPTR);
+void endTurn(struct Entity* player, struct Floor* floorArray, int* currentFloorPTR);
 void interact(struct Entity* player, struct Floor* floorArray, int* currentFloorPTR);
 void changeFloor(int floorChange, int* currentFloorPTR);
 
