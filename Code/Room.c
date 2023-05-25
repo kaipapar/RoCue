@@ -8,7 +8,10 @@
 */
 
 #include "Rogue.h"
-
+/**
+ * This is ok to not return a pointer since 
+ * the return is used locally in Map.c
+*/
 struct Room roomCreation(int y, int x, int height, int width)
 {
     struct Room newRoom;
@@ -23,21 +26,21 @@ struct Room roomCreation(int y, int x, int height, int width)
     return newRoom;
 }
 
-void addRoomToMap(struct Room room)
+void addRoomToMap(struct Room room, struct Tile** map)
 {
     for (int y = room.pos.y; y < room.pos.y + room.roomHeight; y++)
     {
         for (int x = room.pos.x; x < room.pos.x + room.roomWidth; x++)
         {
-            map[currentFloor][y][x].ch = '.';
-            map[currentFloor][y][x].walkable = true;
-            map[currentFloor][y][x].transparent = true;
+            map[y][x].ch = '.';
+            map[y][x].walkable = true;
+            map[y][x].transparent = true;
         }
     }
 }
 
 // Draws new room connections between the centers of 2 rooms and builds hallways on the map
-void roomConnections(struct Position centerSelf, struct Position centerOther)
+void roomConnections(struct Position centerSelf, struct Position centerOther, struct Tile** map)
 {
     struct Position temp;
     
@@ -67,8 +70,8 @@ void roomConnections(struct Position centerSelf, struct Position centerOther)
             break;
         }
         
-        map[currentFloor][temp.y][temp.x].ch = '.';
-        map[currentFloor][temp.y][temp.x].walkable = true;
-        map[currentFloor][temp.y][temp.x].transparent = true;
+        map[temp.y][temp.x].ch = '.';
+        map[temp.y][temp.x].walkable = true;
+        map[temp.y][temp.x].transparent = true;
     }
 }

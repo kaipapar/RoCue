@@ -7,16 +7,17 @@
 @Desc    :   None
 */
 #include "Rogue.h"
-/*  Enemy creation, pathfinding, interaction with player    */
+/** @file  Enemy creation, pathfinding, interaction with player    */
 
 /*
 Create enemy entity
     inherits from entity struct, 
 
 */
-struct Entity* enemyCreation()
+struct Entity* enemyCreation(struct Tile** map)
 {
     struct Entity* orc = calloc(1, sizeof(struct Entity));
+    EC((struct Entity*) orc);
 
     orc -> ch = 'O';
     orc -> color = COLOR_PAIR(COIN_COLOR);
@@ -31,7 +32,7 @@ struct Entity* enemyCreation()
         int randomx = rand() % 100;
         int randomy = rand() % 25;
 
-        if (map[currentFloor][randomy][randomx].walkable && flag == 0)
+        if (map[randomy][randomx].walkable && flag == 0)
         {
             orc -> pos.x = randomx;
             orc -> pos.y = randomy;
@@ -42,7 +43,7 @@ struct Entity* enemyCreation()
     return orc;
 }
 
-void enemyPathFinding()
+void enemyPathFinding(struct Entity* orc, struct Entity* player, struct Tile** map)
 {     //http://www.roguebasin.com/index.php/Quick_Pathfinding_in_a_Dungeon  
       //Find path between enemy and player, activated when orc sees player
     //  Using BFS
@@ -63,28 +64,28 @@ void enemyPathFinding()
     // mark adjacent positions with weight + 1
     // adjacent --> current; --y, --x, ++x, ++y
     struct Queue* queue = queueCreation();
-    enqueue(queue, map[currentFloor][originY][originX]);
+    enqueue(queue, map[originY][originX]);
     visit(queue);
 
     while (isEmpty(queue) == 0)
     {
-        if (currentX-- == 0 && map[currentFloor][currentY][currentX--].walkable == true)
+        if (currentX-- == 0 && map[currentY][currentX--].walkable == true)
         {   // operate on (x-1,y)
-            map[currentFloor][currentY][currentX-1].found = map[currentFloor][currentY][currentX].found++;
+            map[currentY][currentX-1].found = map[currentY][currentX].found++;
             
 
         }
-        else if (currentX++ == 0 && map[currentFloor][currentY][currentX++].walkable == true)
+        else if (currentX++ == 0 && map[currentY][currentX++].walkable == true)
         {   //operate on (x+1,y)
-            map[currentFloor][currentY][currentX+1].found = map[currentFloor][currentY][currentX].found++;
+            map[currentY][currentX+1].found = map[currentY][currentX].found++;
         }
-        else if (currentY++ == 0 && map[currentFloor][currentY++][currentX].walkable == true)
+        else if (currentY++ == 0 && map[currentY++][currentX].walkable == true)
         {   // operate on (x,y+1)
-            map[currentFloor][currentY+1][currentX].found = map[currentFloor][currentY][currentX].found++;
+            map[currentY+1][currentX].found = map[currentY][currentX].found++;
         }
-        else if (currentY-- == 0 && map[currentFloor][currentY--][currentX].walkable == true)
+        else if (currentY-- == 0 && map[currentY--][currentX].walkable == true)
         {   // operate on (x,y-1)
-            map[currentFloor][currentY-1][currentX].found = map[currentFloor][currentY][currentX].found++;
+            map[currentY-1][currentX].found = map[currentY][currentX].found++;
         
         }
         else    

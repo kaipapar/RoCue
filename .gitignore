@@ -52,4 +52,5 @@ Mkfile.old
 dkms.conf
 
 # Rogue linux exe
-Tutorial/Rogue
+Code/Rogue.o
+Code/Rogue

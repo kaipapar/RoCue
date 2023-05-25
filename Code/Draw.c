@@ -10,19 +10,19 @@
 #include "Rogue.h"
 
 
-void mapDrawing()
+void mapDrawing(struct Tile** map)
 {
     for (int y = 0; y < MAP_HEIGHT; y++)
     {
         for (int x = 0; x < MAP_WIDTH; x++)
         {
-            if (map[currentFloor][y][x].visible)
+            if (map[y][x].visible)
             {
-                mvaddch(y, x, map[currentFloor][y][x].ch | map[currentFloor][y][x].color);
+                mvaddch(y, x, map[y][x].ch | map[y][x].color);
             }
-            else if (map[currentFloor][y][x].seen)
+            else if (map[y][x].seen)
             {
-                mvaddch(y, x, map[currentFloor][y][x].ch | COLOR_PAIR(SEEN_COLOR));
+                mvaddch(y, x, map[y][x].ch | COLOR_PAIR(SEEN_COLOR));
             }
             else
             {
@@ -45,32 +45,38 @@ void entityDrawing(struct Entity* entity)
     }
 }
 
-void coinDrawing()
+/**
+ * @brief A function which renders an array of entities, eg. coinArray
+ * @param[in] entityArray : placeholder for any array of similar entities
+ * @param[in] entityCount : getting the size of the array as argument is best practises
+*/
+void entitiesDrawing(struct Entity* entityArray, int entityCount)
 {
-    for(int i = 0; i < COIN_COUNT; i++)
+    for(int i = 0; i < entityCount; i++)
     {
-        if ((coinArray + i)->visible == true)
+        if ((entityArray + i)->visible == true)
         {
-        mvaddch((coinArray + i) -> pos.y, (coinArray + i) -> pos.x, (coinArray + i) -> ch | (coinArray + i)-> color);
+            mvaddch((entityArray + i) -> pos.y, 
+                    (entityArray + i) -> pos.x, 
+                    (entityArray + i) -> ch | (entityArray + i)-> color);
         }
-
     }
 }
 
-void allDraw()
+void allDraw(struct Entity* player, struct Floor* floorArray, int* currentFloorPTR)
 {
     clear();    // clears the screen before refreshing
-    mapDrawing(); // renders the game map
+    mapDrawing(floorArray[*currentFloorPTR].map); // renders the game map
     entityDrawing(player);
-    coinDrawing(); // temporary testing function (replace later)
-    entityDrawing(orc); // orc is similar to player
-    entityDrawing(stairs);
-    infoBoxDraw(); // UI element rendering for controls info
+    entitiesDrawing(floorArray[*currentFloorPTR].coinArray, COIN_COUNT); // temporary testing function (replace later)
+    entityDrawing(floorArray[*currentFloorPTR].orc); // orc is similar to player
+    entityDrawing(floorArray[*currentFloorPTR].stairs);
+    infoBoxDraw(player, currentFloorPTR, floorArray); // UI element rendering for controls info
 }
-
-void infoBoxDraw()
+/**  Subwindow for printing game information */
+void infoBoxDraw(struct Entity* player, int* currentFloorPTR, struct Floor* floorArray)
 {
-        /*  Subwindow for printing game information */
+
     WINDOW* subwindow = newwin(13,30,5,100);
     refresh();
     box(subwindow,0,0);
@@ -81,7 +87,8 @@ void infoBoxDraw()
                             "Quit - F2 \n"
                             "Interact - I \n"
                             "Inventory - E";
-    mvwprintw(subwindow, 1, 1, "Welcome to RoCue\n %s \n Y: %d, X: %d \n Floor: %d \n Points: %d", hintBoxContent,player->pos.y, player->pos.x, currentFloor, player -> points);
+    mvwprintw(subwindow, 1, 1, "Welcome to RoCue\n %s \n Y: %d, X: %d \n Floor: %d \n Points: %d \n PosStart: Y: %d X: %d", 
+                            hintBoxContent,player->pos.y, player->pos.x, *currentFloorPTR, player -> points, floorArray[*currentFloorPTR].stairs->pos.y, floorArray[*currentFloorPTR].stairs->pos.x);
     //mvwprintw(subwindow,1,1,"Player y position: %d, x position: %d",);
     refresh();
     wrefresh(subwindow);

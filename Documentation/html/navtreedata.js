@@ -38,17 +38,25 @@ var NAVTREE =
     ] ],
     [ "TODO", "md__t_o_d_o.html", null ],
     [ "Data Structures", "annotated.html", [
-      [ "Data Structures", "annotated.html", "annotated_dup" ]
+      [ "Data Structures", "annotated.html", "annotated_dup" ],
+      [ "Data Fields", "functions.html", [
+        [ "All", "functions.html", null ],
+        [ "Variables", "functions_vars.html", null ]
+      ] ]
     ] ],
     [ "Files", "files.html", [
-      [ "File List", "files.html", "files_dup" ]
+      [ "File List", "files.html", "files_dup" ],
+      [ "Globals", "globals.html", [
+        [ "All", "globals.html", null ],
+        [ "Functions", "globals_func.html", null ]
+      ] ]
     ] ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"_rogue_8h_source.html"
+"_engine_8c.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

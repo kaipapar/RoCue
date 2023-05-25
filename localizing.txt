@@ -1,3 +1,44 @@
 1. initialize variables after menuDraw
 2. find data flows and give pointers as arguments
 3. localize variables
+
+floorstuct:
+1. replace z axis from map with a struct that includes 
+all relevant data for a floor:
+    1. map
+    2. orc
+    3. coinArray
+    4. stairs
+    5. start pos
+    6. exit pos 
+    
+2. create a array of x floor structs --> this is how the z coordinate is replaced
+3. make all data flow _nice_
+4. best case --> give functions only what they need 
+    --> compromise: give as little as possible without fiddling with architecture.
+5. functions require only one of the floors to function properly -> give only floorArray[currentFloor], not the whole array. 
+6. update to 5. We need to pass the whole floorArray since it is a pointer.
+    If we just pass a member of an array we modify it locally.
+    A better way of optimization might be to reduce pointers inside struct mania
+    meaning that we might not need to declare orc as a pointer inside of the floorStruct
+    since we already have a pointer to the floorStruct called floorArray.
+
+    This would require a meeting because it is such a big change. 'And i dont want to do it'
+
+7. Changing argument style changes the optimization and performance but also readibility of the code. 
+    If every function requiring a member of floorStruct just takes floorStruct and currentFlor as its arguments it might be confusing as 
+    to what we are actually doing in that function.
+
+
+
+problems:
+1. Stairs don't go through FOV, seen always.   
+2. weird glitch: while moving a terminal cursor looking character flashes
+    in different places on the map. Memory leak? It does this also on the points board.
+    -->doesn't happen currently (15:00, 15.5.23)
+3. When interacting with stairs the game jumps from floor 0 -> 6
+4. I don't think posStart works properly. Sometimes spawns player in walls on other floors than 0.
+5. No interaction with stairs. Other interaction works. (15.5.)
+    --> I think a local version of currentFloor was made in interact(), 
+    I removed currentFloor as an argument and it works. 
+6. Compiles reaally slow!?

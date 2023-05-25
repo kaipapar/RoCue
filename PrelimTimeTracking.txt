@@ -4,4 +4,21 @@
     10.30-12:45 -- TODO, time tracking, researching Doxygen.
     14:30-17:17 -- Same as above, and Readme. Initialized Doxygen documentation for project.
 10.5.23 Project environment polishing - Kaipapar, Neettan
-    11-14 --
+    11-14 -- Project plan, starting localization, stairs to other way, planning floor struct
+    15:30- 18:05 -- Kaipapar. localization done, floorArray underway
+12.5.23 floorArray stuff - Kaipapar
+    12:30-16:54 -- Thinkin about program architecture, writing current problems
+                    Localized variables except current floor but that shouldn't be hard to include
+                    finished floorstruct for now, commented a lot, added proper memory management
+                    among other things.
+15.5.23 floorStruct fine tuning - Kaipapar
+    15:00-15:40 -- Tweaking parameters and figuring out 
+                    interaction with stairs and trying not to spawn into walls..
+16.5.23 floorStruct player position change - Kaipapar
+    15-16:15 -- Trying to get the player to spawn in to the correct location upon floorchange. Problems are mainly solved, next up is implementation.
+17.5.23 floorstruct - Kaipapar
+    11:30 - 12 -- I started localizing curentFloor
+    14:30 - 16 -- Floorstruct now works as intended!
+    16-17 -- Last hour went with git shizzle.
+23.5.23 general project upkeeping - Kaipapar, Neettan
+    12 - 16:26 -- Stairs bug solved, upkeep added
