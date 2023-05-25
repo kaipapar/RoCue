@@ -160,7 +160,9 @@ struct Entity* coinCreation(struct Tile** map);
 // Enemy.c
 struct Entity* enemyCreation(struct Tile** map);
 struct Position* enemyPathFinding(struct Entity* orc, struct Entity* player, struct Tile** map);
-void enemyPathFindingSimple(struct Entity * start, struct Entity * end);
+struct Position getCloser(struct Entity * start, struct Entity * end);
+struct Position* getDirections(struct Entity *start, struct Entity *end);
+void moveEnemy(struct Entity *start, struct Position newPos);
 
 // Queue.c
 struct Queue* queueCreation();

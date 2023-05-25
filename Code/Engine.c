@@ -45,7 +45,11 @@ void gameLoop()
 
     createFOV(player, floorArray, currentFloorPTR);
     allDraw(player, floorArray, currentFloorPTR);
-    
+
+    /// variables for pathfinding
+    struct Position* directions = calloc(STACKLIMIT, sizeof(struct Position));
+    int cursor = 0;
+
     while(true)
     {       
         ch = getch();   
@@ -58,7 +62,23 @@ void gameLoop()
                         player, 
                         floorArray, currentFloorPTR);
         allDraw(player, floorArray, currentFloorPTR);
-        enemyPathFindingSimple(floorArray[currentFloor].orc, player);
+
+        /// Couple if statements for pathfinding
+        if (lineOfSight(floorArray[*currentFloorPTR].orc->pos, player->pos, floorArray[*currentFloorPTR].map))
+        {
+            //directions = getDirections(floorArray[*currentFloorPTR].orc, player);
+            cursor = 0;
+            //moveEnemy(floorArray[*currentFloorPTR].orc, directions[cursor]);
+        }
+        else if (directions[cursor].y == 0 && directions[cursor].x == 0)
+        {/*do nothing*/}
+        // v might be the problem. calling move enemy when directions are not initialized
+        else
+        {
+            cursor++;
+            //moveEnemy(floorArray[*currentFloorPTR].orc, directions[cursor]);
+        }
+
         if (gameOver(player))
         {
             break;
