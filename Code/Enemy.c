@@ -42,12 +42,15 @@ struct Entity* enemyCreation(struct Tile** map)
     }
     return orc;
 }
-
-void enemyPathFinding(struct Entity* orc, struct Entity* player, struct Tile** map)
+/**
+ * Finds the shortest path to a player and returns it as an array of position structs
+*/
+struct Position* enemyPathFinding(struct Entity* orc, struct Entity* player, struct Tile** map)
 {     //http://www.roguebasin.com/index.php/Quick_Pathfinding_in_a_Dungeon  
       //Find path between enemy and player, activated when orc sees player
     //  Using BFS
-
+    // Local map though which is the 
+    struct Tile** localMap = map;
     // orc position
     struct Position origin = orc->pos;
     // player position
@@ -55,23 +58,25 @@ void enemyPathFinding(struct Entity* orc, struct Entity* player, struct Tile** m
 
     //int weight = 0; //To be used in a future update
 
-    struct Position current = {0,0};
+    struct Position currentNode = {0,0};
 
     // need for 'selected' variable ? 
 
     // mark adjacent positions with weight + 1
     // adjacent --> current; --y, --x, ++x, ++y
     struct Queue* queue = queueCreation();
+
+    currentNode = origin;
     
-    enqueue(queue, map[origin.y][origin.x]);
-    visit(queue);
+    enqueue(queue, map[currentNode.y][currentNode.x]);
+    visit(queue);   // This needs to alter the data in map
 
     while (!isEmpty(queue)) ///< While queue is not empty visit neighbours of current 
     {
         //  current = deque
-
+        currentNode = deque(queue);
         // visit neighbours
-        if (currentX-- == 0 && map[currentY][currentX--].walkable == true)
+        if ( && map[currentY][currentX--].walkable == true)
         {   // operate on (x-1,y)
             map[currentY][currentX-1].found = map[currentY][currentX].found++;
         }
@@ -95,8 +100,48 @@ void enemyPathFinding(struct Entity* orc, struct Entity* player, struct Tile** m
             break;
         }
     }
+    struct Position* shortestPath = calloc(STACKLIMIT, sizeof(struct Position));
+    return shortestPath;
 }
 
+/**
+ * Simple path finding to ease my pain.
+ * 
+*/
+struct Position enemyPathFindingSimple(struct Entity *start, struct Entity *end)
+{
+    struct Position newPos; ///< local position to be returned
+    if (abs(start->pos.x-1 - end->pos.x) < abs(start->pos.x - end->pos.x)) //-> step left
+    {
+        start->pos.x--;
+    }
+    else if (abs(start->pos.x+1 - end->pos.x) < abs(start->pos.x - end->pos.x)) //-> step right
+    {
+        start->pos.x++;
+    }
+    else if (abs(start->pos.y-1 - end->pos.x) < abs(start->pos.y - end->pos.x)) //-> step up
+    {
+        start->pos.y--;
+    }
+    else if (abs(start->pos.y+1 - end->pos.x) < abs(start->pos.y - end->pos.x)) //-> step down
+    {
+        start->pos.y++;
+    }
+    return newPos;
+}
+struct Position* simplePathFinding(struct Entity *start, struct Entity *end)
+{
+    // cursor 
+    // 
+    struct Position* directions = calloc(STACKLIMIT, sizeof(struct Position));
+
+    while (start->pos.y != end->pos.y && start->pos.x != end->pos.x)
+    {
+        // add locations to directions
+        
+    }
+    return directions;
+}
 
 
 

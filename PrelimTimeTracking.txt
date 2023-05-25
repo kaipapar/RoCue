@@ -22,3 +22,5 @@
     16-17 -- Last hour went with git shizzle.
 23.5.23 general project upkeeping - Kaipapar, Neettan
     12 - x --
+25.5.23 pathfinding - Kaipapar
+    11 - 12

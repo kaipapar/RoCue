@@ -26,9 +26,9 @@ void enqueue(struct Queue *queue, struct Tile tile)
         printf("\nOverflow!!");
     }
     else
-    {
-        queue->data[queue->end] = tile;
-        queue->end++;
+    {   // Should these be swapped around?
+        queue->data[queue->end] = tile; ///< Inserts the tile which is enqueued to the end of the queue
+        queue->end++;                   ///< increments the end of the queue to the correct location
     }
 }
 struct Tile dequeue(struct Queue *queue)

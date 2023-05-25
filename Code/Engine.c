@@ -58,7 +58,7 @@ void gameLoop()
                         player, 
                         floorArray, currentFloorPTR);
         allDraw(player, floorArray, currentFloorPTR);
-        
+        enemyPathFindingSimple(floorArray[currentFloor].orc, player);
         if (gameOver(player))
         {
             break;
