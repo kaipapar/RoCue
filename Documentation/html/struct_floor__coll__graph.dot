@@ -1,0 +1,18 @@
+digraph "Floor"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [label="Floor",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Struct which holds floor specific data."];
+  Node2 -> Node1 [dir="back",color="darkorchid3",style="dashed",label=" map" ];
+  Node2 [label="Tile",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",URL="$struct_tile.html",tooltip=" "];
+  Node3 -> Node1 [dir="back",color="darkorchid3",style="dashed",label=" rooms" ];
+  Node3 [label="Room",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",URL="$struct_room.html",tooltip=" "];
+  Node4 -> Node3 [dir="back",color="darkorchid3",style="dashed",label=" center\npos" ];
+  Node4 [label="Position",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",URL="$struct_position.html",tooltip=" "];
+  Node5 -> Node1 [dir="back",color="darkorchid3",style="dashed",label=" coinArray\norc\nstairs" ];
+  Node5 [label="Entity",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",URL="$struct_entity.html",tooltip=" "];
+  Node4 -> Node5 [dir="back",color="darkorchid3",style="dashed",label=" pos" ];
+  Node4 -> Node1 [dir="back",color="darkorchid3",style="dashed",label=" posStart" ];
+}

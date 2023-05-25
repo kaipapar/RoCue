@@ -107,16 +107,17 @@ struct Position* enemyPathFinding(struct Entity* orc, struct Entity* player, str
 /**
  * Returns a new position which is closer to end than original position.
 */
-struct Position getCloser(struct Entity *start, struct Entity *end)
+struct Position getCloser(struct Position start, struct Entity *end, struct Tile** map)
 {
-    struct Position newPos = start->pos; ///< local position to be returned
-    if (abs(start->pos.x-1 - end->pos.x) < abs(start->pos.x - end->pos.x)) //-> step left
+    struct Position newPos = start; ///< local position to be returned
+
+    if ((abs(start.x-1 - end->pos.x) < abs(start.x - end->pos.x)) && map[newPos.y][start.x--].walkable == true) //-> step left
         newPos.x--;
-    else if (abs(start->pos.x+1 - end->pos.x) < abs(start->pos.x - end->pos.x)) //-> step right
+    else if ((abs(start.x+1 - end->pos.x) < abs(start.x - end->pos.x)) && map[newPos.y][start.x++].walkable == true) //-> step right
         newPos.x++;
-    else if (abs(start->pos.y-1 - end->pos.x) < abs(start->pos.y - end->pos.x)) //-> step up
+    else if ((abs(start.y-1 - end->pos.x) < abs(start.y - end->pos.x)) && map[start.y--][newPos.x].walkable == true) //-> step up
         newPos.y--;
-    else if (abs(start->pos.y+1 - end->pos.x) < abs(start->pos.y - end->pos.x)) //-> step down
+    else if ((abs(start.y+1 - end->pos.x) < abs(start.y - end->pos.x)) && map[start.y++][newPos.x].walkable == true) //-> step down
         newPos.y++;
 
     return newPos;
@@ -124,19 +125,22 @@ struct Position getCloser(struct Entity *start, struct Entity *end)
 /**
  * Generates an array of directions.
 */
-struct Position* getDirections(struct Entity *start, struct Entity *end)
+struct Position* getDirections(struct Entity *start, struct Entity *end, struct Tile** map)
 {
     // cursor 
     int cursor = 0;
+    int lastcursor = cursor-1;
     // 
     struct Position* directions = calloc(STACKLIMIT, sizeof(struct Position));
-    struct Entity *localStart = start;
-    struct Entity *localEnd = end;
-    while (localStart->pos.y != localEnd->pos.y && localStart->pos.x != localEnd->pos.x)
+    directions[cursor] = start->pos;
+
+    while (directions[cursor].y != end->pos.y && directions[cursor].x != end->pos.x)
     {
         // add locations to directions
-        directions[cursor] = getCloser(directions[cursor--], end); // Start here
         cursor++;
+        lastcursor++;
+        directions[cursor] = getCloser(directions[lastcursor], end, map); // Start here
+        //cursor++;
     }
     return directions;
 }

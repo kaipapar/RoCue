@@ -47,6 +47,8 @@ priority flags: 1 = low priority,
     - [] --> Update game world / player status / logic tick
 - [] Restart button alongside Quit game button --> returns to main menu and regenerates maps
 
+25.5.23
+- [] Render enemy movement alongside player movement
 ### Completed [x]
 12.5.23
 - [x] 2 Create floor struct and struct array 
