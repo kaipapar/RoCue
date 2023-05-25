@@ -22,3 +22,5 @@
     16-17 -- Last hour went with git shizzle.
 23.5.23 general project upkeeping - Kaipapar, Neettan
     12 - 16:26 -- Stairs bug solved, upkeep added
+25.5.23 pathfinding, item properties, code architecture planning - Kaipapar, Neettan
+    12 - 16:57 -- Built and tested functions for bitwise operations, work on pathfinding

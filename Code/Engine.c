@@ -120,3 +120,39 @@ void upkeep(struct Entity* player, struct Floor* floorArray, int* currentFloorPT
     clearFOV(player, floorArray, currentFloorPTR);
     createFOV(player, floorArray, currentFloorPTR);
 }
+
+//Clears the given bit from 1 to 32 and returns the edited value
+unsigned binClear(unsigned target, int bitNumber)
+{
+    target &= ~(1 << (bitNumber - 1));
+    return target;
+}
+
+//Hard sets the given bit from 1 to 32 and returns the edited value
+unsigned binSet(unsigned target, int bitNumber)
+{
+    target |= 1 << (bitNumber - 1);
+    return target;
+}
+
+//Flips the given bit from 1 to 32 and returns the edited value
+unsigned binFlip(unsigned target, int bitNumber)
+{
+    target ^= 1 << (bitNumber - 1);
+    return target;
+}
+
+//Compares a single bit in the given index from 1 to 32, returns True or False
+int binCompare(unsigned target, unsigned bitNumber)
+{
+    unsigned comparison = 0;
+    comparison |= 1 << (bitNumber-1);
+    if ((comparison & target) == comparison)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}

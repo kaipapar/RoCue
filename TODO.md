@@ -49,7 +49,7 @@ priority flags: 1 = low priority,
 25.5.23
 - [] 2 World generation: Expand and refine the algorithm for future features
     - [] --> Add secondary algorithms and variables to help with the placement of entities and objects
-- [] 2 Item properties: build an universal flag system for item and entity properties (binary based?)
+- [-] 2 Item properties: build an universal flag system for item and entity properties (binary based?)
 - [] 2 Ingame time function: create a time system for statuses and world effects
 
 ### Completed [x]
