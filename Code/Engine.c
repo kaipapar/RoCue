@@ -66,16 +66,23 @@ void gameLoop()
         /// Couple if statements for pathfinding
         if (lineOfSight(floorArray[*currentFloorPTR].orc->pos, player->pos, floorArray[*currentFloorPTR].map))
         {
-            directions = getDirections(floorArray[*currentFloorPTR].orc, player, floorArray[*currentFloorPTR].map);
-            cursor = 0;
-            moveEnemy(floorArray[*currentFloorPTR].orc, directions[cursor]);
+            //directions = getDirections(floorArray[*currentFloorPTR].orc, player, floorArray[*currentFloorPTR].map);
+            //cursor = 0;
+            //moveEnemy(floorArray[*currentFloorPTR].orc, directions[cursor]);
+            //endTurn(player, floorArray, currentFloorPTR);
+
+            //moveEnemy(floorArray[*currentFloorPTR].orc, 
+            //        getCloser(floorArray[*currentFloorPTR].orc->pos, player, 
+            //        floorArray[*currentFloorPTR].map));
         }
         else
         {
-            cursor++;
-            moveEnemy(floorArray[*currentFloorPTR].orc, directions[cursor]);
+            //cursor++;
+            //moveEnemy(floorArray[*currentFloorPTR].orc, directions[cursor]);
         }
-
+        moveEnemy(floorArray[*currentFloorPTR].orc, 
+                    getCloser(floorArray[*currentFloorPTR].orc->pos, player, 
+                    floorArray[*currentFloorPTR].map));
         if (gameOver(player))
         {
             break;

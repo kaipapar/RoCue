@@ -19,6 +19,8 @@ void createFOV(struct Entity* player, struct Floor* floorArray, int* currentFloo
     floorArray[*currentFloorPTR].map[player->pos.y][player->pos.x].visible = true;
     floorArray[*currentFloorPTR].map[player->pos.y][player->pos.x].seen = true;
 
+    floorArray[*currentFloorPTR].orc -> visible = true;
+
     for (y = player->pos.y - radius; y < player->pos.y + radius; y++)
     {
         for (x = player->pos.x - radius; x < player->pos.x + radius; x++)
@@ -41,14 +43,14 @@ void createFOV(struct Entity* player, struct Floor* floorArray, int* currentFloo
                         (floorArray[*currentFloorPTR].coinArray + i)->visible = true;
                     }
                 }
-
+                /* For testing
                 if (floorArray[*currentFloorPTR].orc -> pos.y == y 
                     && floorArray[*currentFloorPTR].orc -> pos.x == x 
                     && floorArray[*currentFloorPTR].orc->collected == false)
                 {
                     floorArray[*currentFloorPTR].orc -> visible = true;
                 }
-
+                */
                 if (floorArray[*currentFloorPTR].stairs -> pos.y == y 
                     && floorArray[*currentFloorPTR].stairs -> pos.x == x 
                     && floorArray[*currentFloorPTR].stairs->collected == false)

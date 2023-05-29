@@ -107,17 +107,18 @@ struct Position* enemyPathFinding(struct Entity* orc, struct Entity* player, str
 /**
  * Returns a new position which is closer to end than original position.
 */
+// Check that enemy cant move inside a wall
 struct Position getCloser(struct Position start, struct Entity *end, struct Tile** map)
 {
     struct Position newPos = start; ///< local position to be returned
 
-    if ((abs(start.x-1 - end->pos.x) < abs(start.x - end->pos.x)) && map[newPos.y][start.x--].walkable == true) //-> step left
+    if ((abs(start.x-1 - end->pos.x) < abs(start.x - end->pos.x)))// && map[newPos.y][start.x--].walkable == false //-> step left
         newPos.x--;
-    else if ((abs(start.x+1 - end->pos.x) < abs(start.x - end->pos.x)) && map[newPos.y][start.x++].walkable == true) //-> step right
+    else if ((abs(start.x+1 - end->pos.x) < abs(start.x - end->pos.x)))// && map[newPos.y][start.x++].walkable == false) //-> step right
         newPos.x++;
-    else if ((abs(start.y-1 - end->pos.x) < abs(start.y - end->pos.x)) && map[start.y--][newPos.x].walkable == true) //-> step up
+    else if ((abs(start.y-1 - end->pos.y) < abs(start.y - end->pos.y)))// && map[start.y--][newPos.x].walkable == false) //-> step up
         newPos.y--;
-    else if ((abs(start.y+1 - end->pos.x) < abs(start.y - end->pos.x)) && map[start.y++][newPos.x].walkable == true) //-> step down
+    else if ((abs(start.y+1 - end->pos.y) < abs(start.y - end->pos.y)))// && map[start.y++][newPos.x].walkable == false) //-> step down
         newPos.y++;
 
     return newPos;
