@@ -107,19 +107,32 @@ struct Position* enemyPathFinding(struct Entity* orc, struct Entity* player, str
 /**
  * Returns a new position which is closer to end than original position.
 */
-// Check that enemy cant move inside a wall
-struct Position getCloser(struct Position start, struct Entity *end, struct Tile** map)
+struct Position getCloser(struct Position start, struct Position end, struct Tile** map)
 {
     struct Position newPos = start; ///< local position to be returned
 
-    if ((abs(start.x-1 - end->pos.x) < abs(start.x - end->pos.x)))// && map[newPos.y][start.x--].walkable == false //-> step left
+    struct Position startMin = start;
+    startMin.x--;
+    startMin.y--;
+    
+    struct Position startMax = start;
+    startMax.x++;
+    startMax.y++;
+
+    if (map[start.y][startMin.x].walkable == true && abs(startMin.x - end.x) <= abs(start.x - end.x)) 
+    //-> step left
         newPos.x--;
-    else if ((abs(start.x+1 - end->pos.x) < abs(start.x - end->pos.x)))// && map[newPos.y][start.x++].walkable == false) //-> step right
+    else if (map[newPos.y][startMax.x].walkable == true && abs(startMax.x - end.x) <= abs(start.x - end.x)) 
+    //-> step right
         newPos.x++;
-    else if ((abs(start.y-1 - end->pos.y) < abs(start.y - end->pos.y)))// && map[start.y--][newPos.x].walkable == false) //-> step up
+    else if (map[startMin.y][newPos.x].walkable == true && abs(startMin.y - end.y) <= abs(start.y - end.y)) 
+    //-> step up
         newPos.y--;
-    else if ((abs(start.y+1 - end->pos.y) < abs(start.y - end->pos.y)))// && map[start.y++][newPos.x].walkable == false) //-> step down
+    else if (map[startMax.y][newPos.x].walkable == true && abs(startMax.y - end.y) <= abs(start.y - end.y)) 
+    //-> step down
         newPos.y++;
+    else
+        newPos.x = 0, newPos.y = 0;
 
     return newPos;
 }
@@ -140,15 +153,18 @@ struct Position* getDirections(struct Entity *start, struct Entity *end, struct 
         // add locations to directions
         cursor++;
         lastcursor++;
-        directions[cursor] = getCloser(directions[lastcursor], end, map); // Start here
+        directions[cursor] = getCloser(directions[lastcursor], end->pos, map); // Start here
         //cursor++;
     }
     return directions;
 }
-void moveEnemy(struct Entity *start, struct Position newPos)
+void moveEnemy(struct Entity *start, struct Position newPos, struct Tile** map)
 {
-    start->pos.y = newPos.y;
-    start->pos.x = newPos.x;
+    if (map[newPos.y][newPos.x].walkable == true)
+    {
+        start->pos.y = newPos.y;
+        start->pos.x = newPos.x;
+    }
 }
 
 

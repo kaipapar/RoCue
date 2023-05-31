@@ -69,10 +69,10 @@ void playerMovement(struct Position newPos,
 {
     if (floorArray[*currentFloorPTR].map[newPos.y][newPos.x].walkable)
     {
-        clearFOV(player, floorArray, currentFloorPTR);
+        //clearFOV(player, floorArray, currentFloorPTR);
         player->pos.y = newPos.y;
         player->pos.x = newPos.x;
-        createFOV(player, floorArray, currentFloorPTR);
+        //createFOV(player, floorArray, currentFloorPTR);
     }
 }
 

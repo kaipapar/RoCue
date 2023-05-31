@@ -74,15 +74,18 @@ void gameLoop()
             //moveEnemy(floorArray[*currentFloorPTR].orc, 
             //        getCloser(floorArray[*currentFloorPTR].orc->pos, player, 
             //        floorArray[*currentFloorPTR].map));
+            moveEnemy(floorArray[*currentFloorPTR].orc, 
+                    getCloser(floorArray[*currentFloorPTR].orc->pos, player->pos, 
+                    floorArray[*currentFloorPTR].map), floorArray[*currentFloorPTR].map);
         }
         else
         {
             //cursor++;
             //moveEnemy(floorArray[*currentFloorPTR].orc, directions[cursor]);
         }
-        moveEnemy(floorArray[*currentFloorPTR].orc, 
-                    getCloser(floorArray[*currentFloorPTR].orc->pos, player, 
-                    floorArray[*currentFloorPTR].map));
+        
+        
+        endTurn(player, floorArray, currentFloorPTR);
         if (gameOver(player))
         {
             break;

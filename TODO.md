@@ -47,8 +47,9 @@ priority flags: 1 = low priority,
     - [] --> Update game world / player status / logic tick
 - [] Restart button alongside Quit game button --> returns to main menu and regenerates maps
 
-25.5.23
-- [] Render enemy movement alongside player movement
+31.5.23
+- [-] Get pathfinding to work with lineofsight
+
 ### Completed [x]
 12.5.23
 - [x] 2 Create floor struct and struct array 
@@ -63,3 +64,6 @@ priority flags: 1 = low priority,
     - [x] I've now made posStart a member of floorStruct but it doesn't update the players position for some reason. 
             - [] the reason was something to do with casting the global current floor to local current floor etc... WEIRD stuff mang.
 - [x] Localize currentFloor 12.5.23
+
+31.5.23
+- [x] Render enemy movement alongside player movement 25.5.23
