@@ -29,3 +29,5 @@
     1h -- debuggin pathfinding, so that orc wouldnt get stuck on walls
 31.5.23 pathfinding - Kaipapar
     14:30 - 15:45 -- Pathdinding debugged! Now onto making it more complicated.
+2.6.23 bugfixing - Kaipapar
+    13: x -- Weird bug with FOV, leaving some areas not in fov as visible. 
