@@ -43,7 +43,8 @@ void createFOV(struct Entity* player, struct Floor* floorArray, int* currentFloo
                         (floorArray[*currentFloorPTR].coinArray + i)->visible = true;
                     }
                 }
-                /* For testing
+                 //For testing
+                 /*
                 if (floorArray[*currentFloorPTR].orc -> pos.y == y 
                     && floorArray[*currentFloorPTR].orc -> pos.x == x 
                     && floorArray[*currentFloorPTR].orc->collected == false)

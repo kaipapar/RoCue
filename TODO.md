@@ -48,7 +48,13 @@ priority flags: 1 = low priority,
 - [] Restart button alongside Quit game button --> returns to main menu and regenerates maps
 
 31.5.23
-- [-] Get pathfinding to work with lineofsight
+- [x] Get pathfinding to work with lineofsight
+
+2.6.23
+- [] Give player to possibility to escape from the enemy once enemy has caught to up to player
+    - [] IE make enemy only move on some turns, make enemy forget about the player etc
+- [] Decide how we want the enemys pathfinding triggers.
+    - [] IE sound, vision / fov, lineofsight, interaction, time, 
 
 ### Completed [x]
 12.5.23
