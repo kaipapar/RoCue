@@ -30,4 +30,8 @@
 31.5.23 pathfinding - Kaipapar
     14:30 - 15:45 -- Pathdinding debugged! Now onto making it more complicated.
 2.6.23 bugfixing - Kaipapar
-    13: x -- Weird bug with FOV, leaving some areas not in fov as visible. 
+    13 - 15:45 -- Weird bug with FOV, leaving some areas not in fov as visible.
+                The bug was caused by wrong call order. Then I continued with making code more concise.
+                I also created a random path that the enemy walks along when it hasn't spotted the player.
+                I ended with trying to get the enemy to disappear... It seems that the rules regarding it 
+                are different than of other entities

@@ -44,14 +44,14 @@ void createFOV(struct Entity* player, struct Floor* floorArray, int* currentFloo
                     }
                 }
                  //For testing
-                 /*
+                 
                 if (floorArray[*currentFloorPTR].orc -> pos.y == y 
                     && floorArray[*currentFloorPTR].orc -> pos.x == x 
                     && floorArray[*currentFloorPTR].orc->collected == false)
                 {
-                    floorArray[*currentFloorPTR].orc -> visible = true;
+                    //floorArray[*currentFloorPTR].orc -> visible = true;
                 }
-                */
+                
                 if (floorArray[*currentFloorPTR].stairs -> pos.y == y 
                     && floorArray[*currentFloorPTR].stairs -> pos.x == x 
                     && floorArray[*currentFloorPTR].stairs->collected == false)
@@ -68,6 +68,7 @@ void clearFOV(struct Entity* player, struct Floor* floorArray, int* currentFloor
     int y = 0;
     int x = 0;
     int radius = 15;
+    floorArray[*currentFloorPTR].orc -> visible = false;
 
     for (y = player->pos.y - radius; y < player->pos.y + radius; y++)
     {
@@ -124,9 +125,7 @@ int getDistance(struct Position origin, struct Position target)
 bool isInMap(int y, int x)
 {
     if((0 < y && y < MAP_HEIGHT - 1) && (0 < x && x < MAP_WIDTH - 1))
-    {
         return true;
-    }
     return false;
 }
 
@@ -196,9 +195,7 @@ bool lineOfSight(struct Position origin, struct Position target, struct Tile** m
             t += xAbsDelta * 2;
 
             if (x == origin.x && y == origin.y)
-            {
                 return true;
-            }
         }
         return false;  
     }
@@ -207,11 +204,7 @@ bool lineOfSight(struct Position origin, struct Position target, struct Tile** m
 int getSign(int a)
 {
     if (a < 0)
-    {
         return -1;
-    }
     else
-    {
         return 1;
-    }
 }

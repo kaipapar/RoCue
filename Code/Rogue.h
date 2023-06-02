@@ -163,6 +163,8 @@ struct Position* enemyPathFinding(struct Entity* orc, struct Entity* player, str
 struct Position getCloser(struct Position start, struct Position end, struct Tile** map);
 struct Position* getDirections(struct Entity *start, struct Entity *end, struct Tile** map);
 void moveEnemy(struct Entity *start, struct Position newPos, struct Tile** map);
+struct Position randomPath(struct Position start, struct Tile** map);
+
 
 // Queue.c
 struct Queue* queueCreation();

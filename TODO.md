@@ -55,6 +55,8 @@ priority flags: 1 = low priority,
     - [] IE make enemy only move on some turns, make enemy forget about the player etc
 - [] Decide how we want the enemys pathfinding triggers.
     - [] IE sound, vision / fov, lineofsight, interaction, time, 
+- [x] Generate a stardard path for enemy to walk 
+- [] Fix that when Enemy is not in fov it is not rendered.
 
 ### Completed [x]
 12.5.23
