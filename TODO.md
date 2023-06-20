@@ -56,6 +56,11 @@ priority flags: 1 = low priority,
     - [] IE sound, vision / fov, lineofsight, interaction, time, 
 - [x] Generate a stardard path for enemy to walk 
 - [] Fix that when Enemy is not in fov it is not rendered.
+25.5.23
+- [] 2 World generation: Expand and refine the algorithm for future features
+    - [] --> Add secondary algorithms and variables to help with the placement of entities and objects
+- [-] 2 Item properties: build an universal flag system for item and entity properties (binary based?)
+- [] 2 Ingame time function: create a time system for statuses and world effects
 
 ### Completed [x]
 12.5.23
@@ -72,10 +77,7 @@ priority flags: 1 = low priority,
             - [] the reason was something to do with casting the global current floor to local current floor etc... WEIRD stuff mang.
 - [x] Localize currentFloor 12.5.23
 
-<<<<<<< HEAD
 23.5.23
 - [x] 2 Stairs: Stairs currently only work in one direction, need to work both ways.
-=======
 31.5.23
 - [x] Render enemy movement alongside player movement 25.5.23
->>>>>>> Pathfinding

@@ -126,7 +126,11 @@ void gameLoop(); ///< Initializes all variables
 void upkeep(struct Entity* player, struct Floor* floorArray, int* currentFloorPTR);
 bool gameOver(struct Entity* player);
 void quitGame(struct Entity* player, struct Floor* floorArray); ///< Doesn't take currentFloor as argument because all floors are freed
-void EC(void *pointer); 
+void EC(void *pointer);
+unsigned binClear(unsigned target, int bitNumber);
+unsigned binSet(unsigned target, int bitNumber);
+unsigned binFlip(unsigned target, int bitNumber);
+int binCompare(unsigned target, unsigned bitNumber);
 
 // Map.c
 struct Tile** mapTileCreation();
