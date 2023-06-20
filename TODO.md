@@ -56,7 +56,8 @@ priority flags: 1 = low priority,
     - [] IE sound, vision / fov, lineofsight, interaction, time, 
 - [x] Generate a stardard path for enemy to walk 
 - [] Fix that when Enemy is not in fov it is not rendered.
-
+20.6.23
+- [] code file i/o stuff, figure out how to get seed into the file...
 ### Completed [x]
 12.5.23
 - [x] 2 Create floor struct and struct array 
@@ -72,10 +73,7 @@ priority flags: 1 = low priority,
             - [] the reason was something to do with casting the global current floor to local current floor etc... WEIRD stuff mang.
 - [x] Localize currentFloor 12.5.23
 
-<<<<<<< HEAD
 23.5.23
 - [x] 2 Stairs: Stairs currently only work in one direction, need to work both ways.
-=======
 31.5.23
 - [x] Render enemy movement alongside player movement 25.5.23
->>>>>>> Pathfinding

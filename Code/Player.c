@@ -51,10 +51,14 @@ void inputHandling(int input, struct Entity* player,
             playerMovement(newPos, player, floorArray, currentFloorPTR);
             break;
         case KEY_F(2):
-            quitGame(player, floorArray);
+            if (toQuit())
+                quitGame(player, floorArray);
             break;
         case 'i':
             interact(player, floorArray, currentFloorPTR);
+            break;
+        case 't':
+            saveGame(player, floorArray);
             break;
         default:
             break;

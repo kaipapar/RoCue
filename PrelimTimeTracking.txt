@@ -36,3 +36,5 @@
                 I also created a random path that the enemy walks along when it hasn't spotted the player.
                 I ended with trying to get the enemy to disappear... It seems that the rules regarding it 
                 are different than of other entities
+20.6.23 - Kaipapar
+    16 - 19 -- Merged the changes which I had made long ago and started on making seeding optional.

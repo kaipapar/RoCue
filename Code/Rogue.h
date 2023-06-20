@@ -119,14 +119,17 @@ void entityDrawing(struct Entity* entity);
 void entitiesDrawing(struct Entity* entityArray, int entityCount);
 void allDraw(struct Entity* player, struct Floor* floorArray, int* currentFloorPTR);
 void infoBoxDraw(struct Entity* player, int* currentFloorPTR, struct Floor* floorArray);
+bool toQuit();
 
 // Engine.c
 void setupCurses();
+unsigned checkSeed(unsigned int seed, char *arg);
 void gameLoop(); ///< Initializes all variables
 void upkeep(struct Entity* player, struct Floor* floorArray, int* currentFloorPTR);
 bool gameOver(struct Entity* player);
 void quitGame(struct Entity* player, struct Floor* floorArray); ///< Doesn't take currentFloor as argument because all floors are freed
-void EC(void *pointer); 
+void EC(void *pointer);
+void saveGame(struct Entity* player, struct Floor* floorArray);
 
 // Map.c
 struct Tile** mapTileCreation();

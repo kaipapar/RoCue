@@ -29,6 +29,28 @@ void setupCurses()
 }
 
 /**
+ * Checks that user given seed is technically correct
+ * IF the user given seed is correct that is returned else the original seed is returned.
+*/
+unsigned checkSeed(unsigned int seed, char *arg)
+{
+    bool flag = TRUE;
+    if (arg[0] == 45 || (arg[0] >= 48 && arg[0] <= 57))
+        for (int i = 1; arg[i] != '\0'; i++)
+            if (arg[i] <= 48 && arg[i] >= 57)
+            {
+                flag = FALSE;
+                break; 
+            }
+                
+    if (flag)
+        seed = atoi(arg);
+
+    return seed;
+}
+
+
+/**
  * Initializes game object and sets up game. Runs gameloop
  *
 */
@@ -104,7 +126,7 @@ void quitGame(struct Entity* player, struct Floor* floorArray)
     }
     free(floorArray);
     endwin();
-    exit(1);
+    exit(0);
 }
 
 /**
@@ -123,4 +145,16 @@ void upkeep(struct Entity* player, struct Floor* floorArray, int* currentFloorPT
 {
     clearFOV(player, floorArray, currentFloorPTR);
     createFOV(player, floorArray, currentFloorPTR);
+}
+
+/**
+ * Saves necessary game data to a file
+*/
+void saveGame(struct Entity* player, struct Floor* floorArray)
+{
+    FILE *fp = NULL;
+    if (fp = fopen("./SaveState.bin", "wb"))
+    {
+        //if (fwrite(&))
+    }
 }
