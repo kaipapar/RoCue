@@ -1,6 +1,7 @@
 var annotated_dup =
 [
     [ "Entity", "struct_entity.html", null ],
+    [ "Floor", "struct_floor.html", "struct_floor" ],
     [ "Position", "struct_position.html", null ],
     [ "Queue", "struct_queue.html", null ],
     [ "Room", "struct_room.html", null ],

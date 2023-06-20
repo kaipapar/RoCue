@@ -60,6 +60,8 @@ void inputHandling(int input, struct Entity* player,
             break;
     }
     endTurn(player, floorArray, currentFloorPTR);
+
+    //endTurn(player, floorArray, currentFloorPTR);
 }
 
 /**  Checks whether movement over a certain block is allowed */
@@ -75,6 +77,7 @@ void playerMovement(struct Position newPos,
     }
 }
 
+// Obsolete piece of code hopefully 
 void endTurn(struct Entity* player, struct Floor* floorArray, int* currentFloorPTR)
 {
         clearFOV(player, floorArray, currentFloorPTR);

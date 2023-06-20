@@ -23,7 +23,6 @@ priority flags: 1 = low priority,
 - [-] 1 Github: make repo _nice_ #docs
 - [~] 2 Doxygen: Create documentation with doxygen or similar tool #docs
 - [~] 2 Pathfinding: Make the orcs BSF pathfinding work @Kaipapar
-- [+] 2 Stairs: Stairs currently only work in one direction, need to work both ways.
 - [] 2 Inventory: Create architecture for inventory system
 - [] 1 Items: Create new items after inventory system
 - [] 1 World interaction: Pitfalls etc
@@ -43,8 +42,8 @@ priority flags: 1 = low priority,
     - [] Try to swap the pointers from floor struct members and once created only access them directly using floor.map[y][x] syntax, not floor->map...
 
 23.5.23
-- [] 3 Upkeep function: Check surroundings of player and do something 
-    - [] --> Update game world / player status / logic tick
+- [-] 3 Upkeep function: Check surroundings of player and do something 
+    - [-] --> Update game world / player status / logic tick
 - [] Restart button alongside Quit game button --> returns to main menu and regenerates maps
 
 31.5.23
@@ -75,3 +74,5 @@ priority flags: 1 = low priority,
 
 31.5.23
 - [x] Render enemy movement alongside player movement 25.5.23
+23.5.23
+- [x] 2 Stairs: Stairs currently only work in one direction, need to work both ways.

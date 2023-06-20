@@ -50,7 +50,9 @@ void gameLoop()
     struct Position direction;
 
     while(true)
-    {       
+    {
+        upkeep(player, floorArray, currentFloorPTR);
+        allDraw(player, floorArray, currentFloorPTR);
         ch = getch();   
         inputHandling(ch, player, floorArray, currentFloorPTR);
 
@@ -71,6 +73,7 @@ void gameLoop()
 
         if (gameOver(player))
             quitGame(player, floorArray);
+        //CPUTurn()
     }
 }
 
@@ -114,4 +117,10 @@ void EC(void *pointer)
 		fprintf(stderr, "Error, contiguous memory allocation failed");
 		exit(-1);
 	}
+}
+
+void upkeep(struct Entity* player, struct Floor* floorArray, int* currentFloorPTR)
+{
+    clearFOV(player, floorArray, currentFloorPTR);
+    createFOV(player, floorArray, currentFloorPTR);
 }
