@@ -19,7 +19,6 @@ void setupCurses()
     noecho();
     curs_set(0);
 
-
     if (has_colors())
     {
         start_color();
@@ -28,6 +27,7 @@ void setupCurses()
         init_pair(SEEN_COLOR, COLOR_BLUE, COLOR_BLACK);
     }
 }
+
 /**
  * Initializes game object and sets up game. Runs gameloop
  *
@@ -43,44 +43,49 @@ void gameLoop()
     int* currentFloorPTR = &currentFloor;   ///< remember the mem loc of current floor
     struct Entity* player = playerCreation(floorArray[*currentFloorPTR].posStart);
 
-    //createFOV(player, floorArray, currentFloorPTR);
-    //allDraw(player, floorArray, currentFloorPTR);
-    
+    createFOV(player, floorArray, currentFloorPTR);
+    allDraw(player, floorArray, currentFloorPTR);
+
+    /// variables for pathfinding
+    struct Position direction;
+
     while(true)
     {
         upkeep(player, floorArray, currentFloorPTR);
         allDraw(player, floorArray, currentFloorPTR);
         ch = getch();   
-        if(ch == KEY_F(2))
+        inputHandling(ch, player, floorArray, currentFloorPTR);
+
+        if (floorArray[*currentFloorPTR].orc->collected == false)
         {
-            break;
-            quitGame(player, floorArray);
+            /// player is visible trigger pathfinding
+            if (lineOfSight(floorArray[*currentFloorPTR].orc->pos, player->pos, floorArray[*currentFloorPTR].map))
+                direction = getCloser(floorArray[*currentFloorPTR].orc->pos, player->pos, floorArray[*currentFloorPTR].map);
+            else ///< follow random directions
+                direction = randomPath(floorArray[*currentFloorPTR].orc->pos, floorArray[*currentFloorPTR].map);
+            moveEnemy(floorArray[*currentFloorPTR].orc, direction, floorArray[*currentFloorPTR].map);
         }
-        inputHandling(ch, 
-                        player, 
-                        floorArray, currentFloorPTR);
-        
+        floorArray[*currentFloorPTR].orc ->visible = false;
+        endTurn(player, floorArray, currentFloorPTR);
+        // Alldraw should be the last call in the game loop.
+        // Otherwise bugs might appear.
+        allDraw(player, floorArray, currentFloorPTR);
+
         if (gameOver(player))
-        {
-            break;
             quitGame(player, floorArray);
-        }
         //CPUTurn()
     }
 }
+
 /**
  * Not fully implemented yet, but should work.
 */
 bool gameOver(struct Entity* player)
 {
     if (player->points < 0)
-    {
         return true;
-    }
     else
-    {
         return false;
-    }
 }
 
 /**
@@ -96,7 +101,6 @@ void quitGame(struct Entity* player, struct Floor* floorArray)
         free(floorArray[i].stairs);
         free(floorArray[i].coinArray);
         free(floorArray[i].map);
-        // ::::free queue also when it is implemented::::
     }
     free(floorArray);
     endwin();

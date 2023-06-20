@@ -87,8 +87,8 @@ void infoBoxDraw(struct Entity* player, int* currentFloorPTR, struct Floor* floo
                             "Quit - F2 \n"
                             "Interact - I \n"
                             "Inventory - E";
-    mvwprintw(subwindow, 1, 1, "Welcome to RoCue\n %s \n Y: %d, X: %d \n Floor: %d \n Points: %d \n PosStart: Y: %d X: %d", 
-                            hintBoxContent,player->pos.y, player->pos.x, *currentFloorPTR, player -> points, floorArray[*currentFloorPTR].stairs->pos.y, floorArray[*currentFloorPTR].stairs->pos.x);
+    mvwprintw(subwindow, 1, 1, "Welcome to RoCue\n %s \n Y: %d, X: %d \n Floor: %d \n Points: %d \n Orc points: %d", 
+                            hintBoxContent,player->pos.y, player->pos.x, *currentFloorPTR, player -> points, floorArray[*currentFloorPTR].orc->points);
     //mvwprintw(subwindow,1,1,"Player y position: %d, x position: %d",);
     refresh();
     wrefresh(subwindow);

@@ -59,8 +59,7 @@ void inputHandling(int input, struct Entity* player,
         default:
             break;
     }
-
-    //endTurn(player, floorArray, currentFloorPTR);
+    endTurn(player, floorArray, currentFloorPTR);
 }
 
 /**  Checks whether movement over a certain block is allowed */
@@ -69,10 +68,10 @@ void playerMovement(struct Position newPos,
 {
     if (floorArray[*currentFloorPTR].map[newPos.y][newPos.x].walkable)
     {
-        clearFOV(player, floorArray, currentFloorPTR);
+        //clearFOV(player, floorArray, currentFloorPTR);
         player->pos.y = newPos.y;
         player->pos.x = newPos.x;
-        createFOV(player, floorArray, currentFloorPTR);
+        //createFOV(player, floorArray, currentFloorPTR);
     }
 }
 
@@ -96,6 +95,7 @@ void interact(struct Entity* player, struct Floor* floorArray, int* currentFloor
             player->points += (floorArray[*currentFloorPTR].coinArray + i)->value;
             (floorArray[*currentFloorPTR].coinArray + i)-> visible = false;
             (floorArray[*currentFloorPTR].coinArray + i)-> collected = true;
+            (floorArray[*currentFloorPTR].coinArray + i)-> points = 0; // this way you cant keep collecting points from a collected coin.
         }
     }
 
@@ -106,14 +106,12 @@ void interact(struct Entity* player, struct Floor* floorArray, int* currentFloor
     {
         dice = rand() % 20;
         if (dice < 10)
-        {
             player->points -= 100;
-        }
         else
-        {
             floorArray[*currentFloorPTR].orc->points -= 300;
-        }
-        floorArray[*currentFloorPTR].orc->collected = true;
+
+        if (floorArray[*currentFloorPTR].orc->points < 0)
+            floorArray[*currentFloorPTR].orc->collected = true;
     }
 
     ///  Interacting with stairs

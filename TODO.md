@@ -46,6 +46,17 @@ priority flags: 1 = low priority,
     - [-] --> Update game world / player status / logic tick
 - [] Restart button alongside Quit game button --> returns to main menu and regenerates maps
 
+31.5.23
+- [x] Get pathfinding to work with lineofsight
+
+2.6.23
+- [] Give player to possibility to escape from the enemy once enemy has caught to up to player
+    - [] IE make enemy only move on some turns, make enemy forget about the player etc
+- [] Decide how we want the enemys pathfinding triggers.
+    - [] IE sound, vision / fov, lineofsight, interaction, time, 
+- [x] Generate a stardard path for enemy to walk 
+- [] Fix that when Enemy is not in fov it is not rendered.
+
 ### Completed [x]
 12.5.23
 - [x] 2 Create floor struct and struct array 
@@ -61,5 +72,10 @@ priority flags: 1 = low priority,
             - [] the reason was something to do with casting the global current floor to local current floor etc... WEIRD stuff mang.
 - [x] Localize currentFloor 12.5.23
 
+<<<<<<< HEAD
 23.5.23
 - [x] 2 Stairs: Stairs currently only work in one direction, need to work both ways.
+=======
+31.5.23
+- [x] Render enemy movement alongside player movement 25.5.23
+>>>>>>> Pathfinding

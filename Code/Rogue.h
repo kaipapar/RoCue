@@ -84,9 +84,9 @@ struct Entity
 /*  Queue struct for pathfinding    */
 struct Queue
 {
-    int end;
-    int front;
-    struct Tile data[STACKLIMIT];
+    int end;                        ///< end of the queue
+    int front;                      ///< front of the queue
+    struct Tile data[STACKLIMIT];   ///< data is an array which contains tiles in the queue
 };
 
 
@@ -160,7 +160,12 @@ struct Entity* coinCreation(struct Tile** map);
 
 // Enemy.c
 struct Entity* enemyCreation(struct Tile** map);
-void enemyPathFinding(struct Entity* orc, struct Entity* player, struct Tile** map);
+struct Position* enemyPathFinding(struct Entity* orc, struct Entity* player, struct Tile** map);
+struct Position getCloser(struct Position start, struct Position end, struct Tile** map);
+struct Position* getDirections(struct Entity *start, struct Entity *end, struct Tile** map);
+void moveEnemy(struct Entity *start, struct Position newPos, struct Tile** map);
+struct Position randomPath(struct Position start, struct Tile** map);
+
 
 // Queue.c
 struct Queue* queueCreation();
