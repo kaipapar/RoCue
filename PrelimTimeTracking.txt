@@ -38,3 +38,6 @@
                 are different than of other entities
 20.6.23 - Kaipapar
     16 - 19 -- Merged the changes which I had made long ago and started on making seeding optional.
+21.6.23 - Kaipapar
+    12 - 13:30 -- Pondering about seeding and and file IO, fixed the CLI flags as arguments. 
+                Now you can seed from CLI

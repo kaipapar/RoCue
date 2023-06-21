@@ -26,9 +26,9 @@ void menuDraw()
     keypad(stdscr, TRUE);
 
     char *choices[] = {
-                        "Play!",
+                        "Start!",
                         "Settings",
-                        "Choice 3",
+                        "Load Game",
                         "Choice 4",
                         "Exit",
                   };
@@ -70,8 +70,22 @@ void menuDraw()
 			case KEY_RIGHT:
 				menu_driver(myMenu, REQ_TOGGLE_ITEM);
                 if (choice == 0)
-                {
+                    // Start
                     gameLoop();
+                else if (choice == 1)
+                    //settings
+                    break;
+                else if (choice == 2)
+                {   // load from file
+                    break;
+                }
+                else if (choice == 4)
+                {
+				free_item(myItems[0]);
+				free_item(myItems[1]);
+                endwin();
+                exit(1);
+                break;
                 }
                 else 
                 {

@@ -34,17 +34,23 @@ void setupCurses()
 */
 unsigned checkSeed(unsigned int seed, char *arg)
 {
-    bool flag = TRUE;
-    if (arg[0] == 45 || (arg[0] >= 48 && arg[0] <= 57))
-        for (int i = 1; arg[i] != '\0'; i++)
-            if (arg[i] <= 48 && arg[i] >= 57)
+    bool flag = FALSE;
+    if (*arg == 45 || (*arg >= 48 && *arg <= 57))
+    {    
+        for (int i = 1; *(arg+i) != '\0'; i++)
+            if (*(arg+i) >= 48 && *(arg+i) <= 57)
             {
-                flag = FALSE;
-                break; 
+                flag = TRUE;
             }
-                
+            else
+            {
+                flag = FALSE; 
+                break;
+            }           
+    }
     if (flag)
         seed = atoi(arg);
+    printf("NewSeed: %d, arg: %s",seed,arg);
 
     return seed;
 }

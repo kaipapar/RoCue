@@ -28,7 +28,6 @@ priority flags: 1 = low priority,
 - [] 1 World interaction: Pitfalls etc
 - [] 1 File I/O: Save points--gamestates..
 - [+] 2 Error Checking: Memory buffers, check that malloc works.
-- [] 1 Seed: Make seeding optional
 
 8.5.23  
 - [-] 2 Commenting: Recreate docstrings and comments to work with Doxygen #docs
@@ -57,7 +56,7 @@ priority flags: 1 = low priority,
 - [x] Generate a stardard path for enemy to walk 
 - [] Fix that when Enemy is not in fov it is not rendered.
 20.6.23
-- [] code file i/o stuff, figure out how to get seed into the file...
+- [-] code file i/o stuff, figure out how to get seed into the file...
 ### Completed [x]
 12.5.23
 - [x] 2 Create floor struct and struct array 
@@ -77,3 +76,5 @@ priority flags: 1 = low priority,
 - [x] 2 Stairs: Stairs currently only work in one direction, need to work both ways.
 31.5.23
 - [x] Render enemy movement alongside player movement 25.5.23
+21.6.23
+- [x] 1 Seed: Make seeding optional
