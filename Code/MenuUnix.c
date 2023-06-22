@@ -107,6 +107,11 @@ void menuDraw()
 	}
 }
 
+void pauseMenu()
+{
+    
+}
+
 #else
 
 void menuDraw()

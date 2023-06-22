@@ -57,6 +57,8 @@ priority flags: 1 = low priority,
 - [] Fix that when Enemy is not in fov it is not rendered.
 20.6.23
 - [-] code file i/o stuff, figure out how to get seed into the file...
+22.6.23
+- [-] Create pause menu implementation
 ### Completed [x]
 12.5.23
 - [x] 2 Create floor struct and struct array 

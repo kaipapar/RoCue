@@ -184,6 +184,7 @@ struct Floor* floorArrayCreation();
 
 //MenuUnix.c
 void menuDraw();
+void pauseMenu();
 
 //extern int currentFloor;
 

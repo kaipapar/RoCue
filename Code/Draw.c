@@ -95,13 +95,3 @@ void infoBoxDraw(struct Entity* player, int* currentFloorPTR, struct Floor* floo
 }
 
 
-/**
- * A subwindow which asks whether the user would like to quit.
- * 
-*/
-bool toQuit()
-{
-
-}
-
-

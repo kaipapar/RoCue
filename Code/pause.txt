@@ -1,0 +1,64 @@
+/**
+ * A subwindow which asks whether the user would like to quit.
+ * 
+*/
+
+Pause menu implementation, features and other:
+
+Should all of these be visible all the time and just print the latest event to a log file
+and render the last line of that file with mvwprintw.
+
+implementation : 
+    Using the same logic as menuUnix.c Pastes a new menu screen over the rendered game.
+    I think this is where Cs no garbage collection comes handy.
+    Calsl upon functions using match case structure. 
+    Is rendered when the pause button is pressed 
+Features :
+    _Continue, 
+        Save, 
+        Save to file, 
+        Save and Quit,
+        Quit,
+        Return to menu_
+    buttons ATLEAST.
+
+    Continue :
+        Exits the pause menu function and returns to the gameplay
+    Save :
+        Overwrites the default save file if it has already been created
+        for the current game
+
+        Creates a default save file if it hasnt been created for the current game.
+
+    Save to file :
+        Same as 'Save' button except you have to specify the file 
+        This button takes you to a separate menu screen where you can type the filename
+        (or just select the incremented savefile name, perhaps for a later day.)
+        This is implemented using forms.h.
+        Here you should be able to erase and correct the text you've written.
+
+    Save and quit :
+        Follows same logic as save but with the quit function added.
+    
+    Quit :
+        Self - explanatory
+
+    Return to menu :
+        If for some reason the user wants to go back to menu 
+
+Other :
+    Because the pause menu is called from inside the game loop (from input handling)
+    It shouldn't interfere with the gameplay.
+
+    Saving :
+        All of the saving stuff should use the exact same function.
+        The saving function should  take the data which is being saved
+        and the file as arguments.
+
+        The save files should all be located in a folder: ie /Savefiles/
+
+        We can check if a file exists by trying to read it.
+
+        How do we check if a file is corrupt/ partially corrupt?
+
+        Shuold it be saves as binary or human readable?

@@ -41,3 +41,5 @@
 21.6.23 - Kaipapar
     12 - 13:30 -- Pondering about seeding and and file IO, fixed the CLI flags as arguments. 
                 Now you can seed from CLI
+22.6.23 - Kaipapar
+    13 - 15 -- Planning pause menu features, studying forms.h

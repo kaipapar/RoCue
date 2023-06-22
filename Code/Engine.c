@@ -45,6 +45,7 @@ unsigned checkSeed(unsigned int seed, char *arg)
             else
             {
                 flag = FALSE; 
+                printf("Seed is invalid (%s): continuing with regular seed: %d \n",arg,seed);
                 break;
             }           
     }
